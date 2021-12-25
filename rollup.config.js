@@ -10,9 +10,13 @@ export default [
         output: {
             name: 'rfc',
             file: pkg.browser,
-            format: 'umd'
+            format: 'umd',
+            globals: {
+                luxon: 'luxon',
+            },
         },
-        plugins: [resolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' })]
+        plugins: [resolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' })],
+        external: ['luxon'],
     },
 
     // CommonJS (for Node) and ES module (for bundlers) build.
@@ -28,5 +32,6 @@ export default [
             { file: pkg.module, format: 'es' },
         ],
         plugins: [typescript({ tsconfig: './tsconfig.json' })],
+        external: ['luxon'],
     },
 ];
