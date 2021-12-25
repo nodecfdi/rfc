@@ -1,4 +1,4 @@
-import { RfcParser } from '../../src/rfc-parser';
+import { RfcParser } from '../../src';
 
 describe('RfcParser', () => {
     test('parse persona fisica', () => {

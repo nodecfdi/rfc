@@ -1,4 +1,4 @@
-import { RfcIntConverter } from '../../src/rfc-int-converter';
+import { RfcIntConverter } from '../../src';
 
 describe('RfcIntConverter', () => {
     let converter: RfcIntConverter;

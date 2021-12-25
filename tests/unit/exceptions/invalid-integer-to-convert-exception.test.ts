@@ -1,4 +1,4 @@
-import { InvalidIntegerToConvertException } from '../../../src/exceptions/invalid-integer-to-convert-exception';
+import { InvalidIntegerToConvertException } from '../../../src';
 
 describe('InvalidIntegerToConvertException', () => {
     test('exception lower than zero', () => {

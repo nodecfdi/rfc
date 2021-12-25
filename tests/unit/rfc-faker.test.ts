@@ -1,5 +1,4 @@
-import { RfcFaker } from '../../src/rfc-faker';
-import { Rfc } from '../../src/rfc';
+import { Rfc, RfcFaker } from '../../src';
 
 describe('RfcFaker', () => {
     const iterations = 100;

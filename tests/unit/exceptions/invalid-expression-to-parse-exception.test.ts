@@ -1,4 +1,4 @@
-import { InvalidExpressionToParseException } from '../../../src/exceptions/invalid-expression-to-parse-exception';
+import { InvalidExpressionToParseException } from '../../../src';
 
 describe('InvalidExpressionToParseException', () => {
     test('exception invalid parts', () => {

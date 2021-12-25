@@ -1,4 +1,4 @@
-import { Rfc } from '../../src/rfc';
+import { Rfc } from '../../src';
 
 describe('Rfc', () => {
     test('create rfc persona fisica', () => {
