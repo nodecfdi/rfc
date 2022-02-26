@@ -1,4 +1,5 @@
 import { RfcParser } from '../../src';
+import { DateTime } from 'luxon';
 
 describe('RfcParser', () => {
     test('parse persona fisica', () => {
@@ -9,6 +10,7 @@ describe('RfcParser', () => {
         expect(parser.getDay()).toBe(13);
         expect(parser.getHKey()).toBe('7N');
         expect(parser.getChecksum()).toBe('A');
+        expect(parser.getDate()).toStrictEqual(DateTime.fromISO('2080-01-13'));
     });
 
     test('parse persona moral', () => {
@@ -19,6 +21,7 @@ describe('RfcParser', () => {
         expect(parser.getDay()).toBe(31);
         expect(parser.getHKey()).toBe('03');
         expect(parser.getChecksum()).toBe('A');
+        expect(parser.getDate()).toStrictEqual(DateTime.fromISO('2099-12-31'));
     });
 
     test('parse using lower case', () => {

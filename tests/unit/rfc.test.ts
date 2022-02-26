@@ -1,4 +1,5 @@
 import { Rfc } from '../../src';
+import { DateTime } from 'luxon';
 
 describe('Rfc', () => {
     test('create rfc persona fisica', () => {
@@ -95,5 +96,36 @@ describe('Rfc', () => {
     test('create foreign', () => {
         const rfc = Rfc.newForeign();
         expect(rfc.getRfc()).toBe(Rfc.RFC_FOREIGN);
+    });
+
+    test('is valid', () => {
+        expect(Rfc.isValid('COSC8001137NA')).toBeTruthy();
+    });
+
+    test('is not valid', () => {
+        expect(Rfc.isValid('COSC8099137NA')).toBeFalsy();
+    });
+
+    test('obtain date leap years', () => {
+        const expected = DateTime.fromISO('2000-02-29').toMillis();
+        expect(Rfc.obtainDate('XXX000229XX6')).toBe(expected);
+
+        // invalid leap year
+        expect(Rfc.obtainDate('XXX030229XX6')).toBe(0);
+    });
+
+    test.each([
+        [''],
+        ['ABCD010100AAA'],
+        ['ABCD010001AAA'],
+        ['ABCD010132AAA'],
+        ['ABCD010229AAA'],
+        ['ABCD000230AAA'],
+        ['ABCD0A0101AAA'],
+        ['ABCD010A01AAA'],
+        ['ABCD01010AAAA'],
+        ['ABCD-10123AAA'],
+    ])('obtain date with invalid input', (rfc: string) => {
+        expect(Rfc.obtainDate(rfc)).toBe(0);
     });
 });

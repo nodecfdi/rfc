@@ -20,13 +20,25 @@ export class RfcParser {
     /** "dígito verificador" part AAAA000101AA_ */
     private readonly checksum: string;
 
-    private constructor(name: string, year: number, month: number, day: number, hKey: string, checksum: string) {
+    /** converter datetime of current rfc */
+    private readonly date: DateTime;
+
+    private constructor(
+        name: string,
+        year: number,
+        month: number,
+        day: number,
+        hKey: string,
+        checksum: string,
+        date: DateTime
+    ) {
         this.name = name;
         this.year = year;
         this.month = month;
         this.day = day;
         this.hKey = hKey;
         this.checksum = checksum;
+        this.date = date;
     }
 
     /**
@@ -70,7 +82,8 @@ export class RfcParser {
             Number(matches.groups?.['month']),
             Number(matches.groups?.['day']),
             matches.groups?.['hkey'] || '',
-            matches.groups?.['checksum'] || ''
+            matches.groups?.['checksum'] || '',
+            date
         );
     }
 
@@ -96,5 +109,9 @@ export class RfcParser {
 
     public getChecksum(): string {
         return this.checksum;
+    }
+
+    public getDate(): DateTime {
+        return this.date;
     }
 }

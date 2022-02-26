@@ -12,6 +12,9 @@ export class Rfc {
     /** Foreign representation of RFC (used on foreign parties that does not have mexican RFC) */
     public static RFC_FOREIGN = 'XEXX010101000';
 
+    public static DISALLOW_GENERIC = 1;
+    public static DISALLOW_FOREIGN = 2;
+
     private readonly rfc: string;
     private readonly length: number;
 
@@ -147,6 +150,34 @@ export class Rfc {
             this.serial = new RfcIntConverter().stringToInt(this.getRfc());
         }
         return this.serial;
+    }
+
+    public static isValid(value: string): boolean {
+        try {
+            Rfc.checkIsValid(value);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    public static checkIsValid(value: string, flags = 0): void {
+        if (flags !== 0 && Rfc.DISALLOW_GENERIC && value === Rfc.RFC_GENERIC) {
+            throw new Error('No se permite el RFC genérico para público en general');
+        }
+        if (flags !== 0 && Rfc.DISALLOW_FOREIGN && value === Rfc.RFC_FOREIGN) {
+            throw new Error('No se permite el RFC genérico para operaciones con extranjeros');
+        }
+        RfcParser.parse(value);
+    }
+
+    public static obtainDate(rfc: string): number {
+        try {
+            const parts = RfcParser.parse(rfc);
+            return parts.getDate().toMillis();
+        } catch (e) {
+            return 0;
+        }
     }
 
     public toString(): string {
