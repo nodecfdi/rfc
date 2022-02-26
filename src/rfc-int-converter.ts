@@ -306,12 +306,12 @@ export class RfcIntConverter {
         return valuesString.join('').replace(/_/g, '').replace(/#/g, 'Ñ');
     }
 
-    private strDateToInt(value: string): number {
+    protected strDateToInt(value: string): number {
         const valueDate = DateTime.fromFormat(`20${value}`, 'yyyyLLdd');
         return Math.round(Math.abs(DateTime.fromObject({ year: 2000, month: 1, day: 1 }).diff(valueDate, 'days').days));
     }
 
-    private intTostrDate(value: number): string {
+    protected intTostrDate(value: number): string {
         return DateTime.fromObject({ year: 2000, month: 1, day: 1 })
             .plus({
                 days: value,

@@ -32,7 +32,7 @@ export class RfcFaker {
         return this.privateMakeRfc(RfcIntConverter.FISICA_LOWER_BOUND, RfcIntConverter.FISICA_UPPER_BOUND);
     }
 
-    private privateMakeRfc(lowerBound: number, upperBound: number): string {
+    protected privateMakeRfc(lowerBound: number, upperBound: number): string {
         const converter = new RfcIntConverter();
         const random = Math.floor(Math.random() * (upperBound - lowerBound + 1) + lowerBound);
         return converter.intToString(random);
