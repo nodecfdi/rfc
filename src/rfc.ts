@@ -152,9 +152,9 @@ export class Rfc {
         return this.serial;
     }
 
-    public static isValid(value: string): boolean {
+    public static isValid(value: string, flags = 0): boolean {
         try {
-            Rfc.checkIsValid(value);
+            Rfc.checkIsValid(value, flags);
             return true;
         } catch (e) {
             return false;
@@ -162,10 +162,10 @@ export class Rfc {
     }
 
     public static checkIsValid(value: string, flags = 0): void {
-        if (flags !== 0 && Rfc.DISALLOW_GENERIC && value === Rfc.RFC_GENERIC) {
+        if (flags & Rfc.DISALLOW_GENERIC && value === Rfc.RFC_GENERIC) {
             throw new Error('No se permite el RFC genérico para público en general');
         }
-        if (flags !== 0 && Rfc.DISALLOW_FOREIGN && value === Rfc.RFC_FOREIGN) {
+        if (flags & Rfc.DISALLOW_FOREIGN && value === Rfc.RFC_FOREIGN) {
             throw new Error('No se permite el RFC genérico para operaciones con extranjeros');
         }
         RfcParser.parse(value);

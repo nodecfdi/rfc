@@ -98,6 +98,30 @@ describe('Rfc', () => {
         expect(rfc.getRfc()).toBe(Rfc.RFC_FOREIGN);
     });
 
+    test('all works on rfc valids and invalids', () => {
+        expect(Rfc.isValid('COSC8001137NA', Rfc.DISALLOW_GENERIC)).toBeTruthy();
+        expect(Rfc.isValid('XEXX010101000', Rfc.DISALLOW_GENERIC)).toBeTruthy();
+        expect(Rfc.isValid('XAXX010101000', Rfc.DISALLOW_GENERIC)).toBeFalsy();
+    });
+
+    test('invalid disallow generic', () => {
+        expect.hasAssertions();
+        try {
+            Rfc.checkIsValid(Rfc.RFC_GENERIC, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
+        } catch (e) {
+            expect((e as Error).message).toContain('público en general');
+        }
+    });
+
+    test('invalid disallow foreign', () => {
+        expect.hasAssertions();
+        try {
+            Rfc.checkIsValid(Rfc.RFC_FOREIGN, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
+        } catch (e) {
+            expect((e as Error).message).toContain('operaciones con extranjeros');
+        }
+    });
+
     test('is valid', () => {
         expect(Rfc.isValid('COSC8001137NA')).toBeTruthy();
     });
