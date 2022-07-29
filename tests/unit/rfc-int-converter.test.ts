@@ -1,4 +1,4 @@
-import { RfcIntConverter } from '../../src';
+import { RfcIntConverter } from '~/rfc-int-converter';
 
 describe('RfcIntConverter', () => {
     let converter: RfcIntConverter;
@@ -29,7 +29,7 @@ describe('RfcIntConverter', () => {
 
     test.each([
         [40270344269627, 'COSC8001137NA'],
-        [1348025748541, 'DIM8701081LA'],
+        [1348025748541, 'DIM8701081LA']
     ])('known values', (inputSerial: number, inputRfc: string) => {
         expect(converter.intToString(inputSerial)).toBe(inputRfc);
         expect(converter.stringToInt(inputRfc)).toBe(inputSerial);

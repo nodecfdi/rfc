@@ -1,4 +1,4 @@
-import { Rfc } from '../../src';
+import { Rfc } from '~/rfc';
 import { DateTime } from 'luxon';
 
 describe('Rfc', () => {
@@ -64,8 +64,11 @@ describe('Rfc', () => {
 
     test('serial number', () => {
         const rfc = Rfc.fromSerial(1348025748541);
+        // current serial is undefined.
         expect(rfc.calculateSerial()).toBe(1348025748541);
         expect(rfc.getRfc()).toBe('DIM8701081LA');
+        // current serial is defined.
+        expect(rfc.calculateSerial()).toBe(1348025748541);
     });
 
     test('create bad digit', () => {
@@ -104,22 +107,22 @@ describe('Rfc', () => {
         expect(Rfc.isValid('XAXX010101000', Rfc.DISALLOW_GENERIC)).toBeFalsy();
     });
 
+    test('not trown nothing on default', () => {
+        const t = (): void => Rfc.checkIsValid(Rfc.RFC_GENERIC);
+
+        expect(t).not.toThrow('público en general');
+    });
+
     test('invalid disallow generic', () => {
-        expect.hasAssertions();
-        try {
-            Rfc.checkIsValid(Rfc.RFC_GENERIC, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
-        } catch (e) {
-            expect((e as Error).message).toContain('público en general');
-        }
+        const t = (): void => Rfc.checkIsValid(Rfc.RFC_GENERIC, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
+
+        expect(t).toThrow('público en general');
     });
 
     test('invalid disallow foreign', () => {
-        expect.hasAssertions();
-        try {
-            Rfc.checkIsValid(Rfc.RFC_FOREIGN, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
-        } catch (e) {
-            expect((e as Error).message).toContain('operaciones con extranjeros');
-        }
+        const t = (): void => Rfc.checkIsValid(Rfc.RFC_FOREIGN, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
+
+        expect(t).toThrow('operaciones con extranjeros');
     });
 
     test('is valid', () => {
@@ -148,7 +151,7 @@ describe('Rfc', () => {
         ['ABCD0A0101AAA'],
         ['ABCD010A01AAA'],
         ['ABCD01010AAAA'],
-        ['ABCD-10123AAA'],
+        ['ABCD-10123AAA']
     ])('obtain date with invalid input', (rfc: string) => {
         expect(Rfc.obtainDate(rfc)).toBe(0);
     });

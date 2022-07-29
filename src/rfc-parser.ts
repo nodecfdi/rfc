@@ -42,8 +42,8 @@ export class RfcParser {
     }
 
     /**
-     * @param rfc
-     * @throws { InvalidExpressionToParseException }
+     * @param rfc -
+     * @throws InvalidExpressionToParseException
      *
      */
     public static parse(rfc: string): RfcParser {
@@ -63,26 +63,21 @@ export class RfcParser {
          *      u
          */
         const regex =
-            /^(?<name>[A-ZÑ&]{3,4})(?<year>[0-9]{2})(?<month>[0-9]{2})(?<day>[0-9]{2})(?<hkey>[A-Z0-9]{2})(?<checksum>[A0-9])$/u;
+            /^(?<name>[A-ZÑ&]{3,4})(?<year>\d{2})(?<month>\d{2})(?<day>\d{2})(?<hkey>[A-Z0-9]{2})(?<checksum>[A0-9])$/u;
         const matches = rfc.toUpperCase().match(regex);
-        if (!matches) throw new Error('The RFC expression does not contain the valid parts');
-        const date = DateTime.fromISO(
-            `20${matches.groups?.['year']}-${matches.groups?.['month']}-${matches.groups?.['day']}`
-        );
-        if (
-            `${matches.groups?.['year']}${matches.groups?.['month']}${matches.groups?.['day']}` !==
-            date.toFormat('yyLLdd')
-        ) {
+        if (!matches || !matches.groups) throw new Error('The RFC expression does not contain the valid parts');
+        const date = DateTime.fromISO(`20${matches.groups.year}-${matches.groups.month}-${matches.groups.day}`);
+        if (`${matches.groups.year}${matches.groups.month}${matches.groups.day}` !== date.toFormat('yyLLdd')) {
             throw InvalidExpressionToParseException.invalidDate(rfc);
         }
 
         return new RfcParser(
-            matches.groups?.['name'] || '',
-            Number(matches.groups?.['year']),
-            Number(matches.groups?.['month']),
-            Number(matches.groups?.['day']),
-            matches.groups?.['hkey'] || '',
-            matches.groups?.['checksum'] || '',
+            matches.groups.name,
+            Number(matches.groups.year),
+            Number(matches.groups.month),
+            Number(matches.groups.day),
+            matches.groups.hkey,
+            matches.groups.checksum,
             date
         );
     }

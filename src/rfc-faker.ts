@@ -35,6 +35,7 @@ export class RfcFaker {
     protected privateMakeRfc(lowerBound: number, upperBound: number): string {
         const converter = new RfcIntConverter();
         const random = Math.floor(Math.random() * (upperBound - lowerBound + 1) + lowerBound);
+
         return converter.intToString(random);
     }
 }

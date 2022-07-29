@@ -1,7 +1,6 @@
 node_modules
 dist
-build
 docs
+examples
 coverage
-
-jest.config.js
+web_modules

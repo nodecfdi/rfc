@@ -1,4 +1,4 @@
-import { RfcParser } from '../../src';
+import { RfcParser } from '~/rfc-parser';
 import { DateTime } from 'luxon';
 
 describe('RfcParser', () => {

@@ -1,4 +1,4 @@
-import { CheckSum } from '../../src';
+import { CheckSum } from '~/check-sum';
 
 describe('CheckSum', () => {
     let checksum: CheckSum;

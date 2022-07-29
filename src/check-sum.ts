@@ -38,7 +38,7 @@ export class CheckSum {
         'Y': 35,
         'Z': 36,
         ' ': 37,
-        '#': 38,
+        '#': 38
     };
 
     public calculate(rfc: string): string {
@@ -55,6 +55,7 @@ export class CheckSum {
         } else if ('10' === digit) {
             digit = 'A';
         }
+
         return digit;
     }
 }
