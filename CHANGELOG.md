@@ -1,5 +1,16 @@
 # @nodecfdi/rfc ChangeLog
 
+## 1.2.2
+
+## CI
+
+- Update workflow for use pnpm and better test coverage
+- Added SonarCloud for better continuous code quality
+
+### Build
+
+- refactor change from rollup bundle to microbundle
+
 ## 1.2.1
 
 - Fixed method isValid and checkIsValid, problem with bad flags
