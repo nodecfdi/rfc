@@ -11,7 +11,7 @@ import { InvalidIntegerToConvertException } from './exceptions/invalid-integer-t
  * The way to transform the string to integer is splitting the contents into 9 parts with different bases:
  * | optional name | 3 x required name | day since 2000 | 2 x homoclave | checksum |
  * | base 29       | base 28           | base    36525  | base 36       | base 11  |
- * Rfc COSC8001137NA will be: [3, 14, 18, 2, 416731392, 33, 23, 10] => 40,270,344,269,627
+ * Rfc COSC8001137NA will be: [3, 14, 18, 2, 416731392, 33, 23, 10] `=>` 40,270,344,269,627
  * To transform from the integer representation it gets modulus for each base and retrieve the 9 integer parts:
  * 40,270,344,269,627 will be: [3, 14, 18, 2, 416731392, 33, 23, 10], then will convert each part to its strings.
  */
@@ -45,7 +45,7 @@ export class RfcIntConverter {
         7: 7,
         8: 8,
         9: 9,
-        A: 10,
+        A: 10
     };
 
     private HKEY_INT_CHAR = [
@@ -84,7 +84,7 @@ export class RfcIntConverter {
         'W',
         'X',
         'Y',
-        'Z',
+        'Z'
     ];
 
     private HKEY_CHAR_INT: Record<string, number> = {
@@ -123,7 +123,7 @@ export class RfcIntConverter {
         'W': 32,
         'X': 33,
         'Y': 34,
-        'Z': 35,
+        'Z': 35
     };
 
     private NAME_REQ_INT_CHAR = [
@@ -154,7 +154,7 @@ export class RfcIntConverter {
         'Y',
         'Z',
         '&',
-        '#',
+        '#'
     ];
 
     private NAME_REQ_CHAR_INT: Record<string, number> = {
@@ -185,7 +185,7 @@ export class RfcIntConverter {
         'Y': 24,
         'Z': 25,
         '&': 26,
-        '#': 27,
+        '#': 27
     };
 
     private NAME_OPT_INT_CHAR = [
@@ -217,7 +217,7 @@ export class RfcIntConverter {
         'Y',
         'Z',
         '&',
-        '#',
+        '#'
     ];
 
     private NAME_OPT_CHAR_INT: Record<string, number> = {
@@ -249,7 +249,7 @@ export class RfcIntConverter {
         'Y': 25,
         'Z': 26,
         '&': 27,
-        '#': 28,
+        '#': 28
     };
 
     /**
@@ -257,7 +257,7 @@ export class RfcIntConverter {
      *
      * Be aware that if provide malformed RFC will return an integer, but it might not be able to convert it back.
      *
-     * @param rfc
+     * @param rfc -
      */
     public stringToInt(rfc: string): number {
         const vString = rfc.replace(/Ñ/g, '#').padStart(13, '_');
@@ -269,16 +269,17 @@ export class RfcIntConverter {
             this.EXP[4] * this.NAME_REQ_CHAR_INT[vString.charAt(3)],
             this.EXP[5] * this.NAME_REQ_CHAR_INT[vString.charAt(2)],
             this.EXP[6] * this.NAME_REQ_CHAR_INT[vString.charAt(1)],
-            this.EXP[7] * this.NAME_OPT_CHAR_INT[vString.charAt(0)],
+            this.EXP[7] * this.NAME_OPT_CHAR_INT[vString.charAt(0)]
         ];
+
         return integers.reduce((a, b) => a + b, 0);
     }
 
     /**
      * Convert an integer expression to a valid RFC string expression.
      *
-     * @param value
-     * @throws {InvalidIntegerToConvertException} if value is lower than zero or greater than maximum value
+     * @param value -
+     * @throws InvalidIntegerToConvertException if value is lower than zero or greater than maximum value
      */
     public intToString(value: number): string {
         if (value < 0) {
@@ -301,20 +302,22 @@ export class RfcIntConverter {
             this.intTostrDate(integers[3]),
             this.HKEY_INT_CHAR[integers[2]],
             this.HKEY_INT_CHAR[integers[1]],
-            this.CSUM_INT_CHAR[integers[0]],
+            this.CSUM_INT_CHAR[integers[0]]
         ];
+
         return valuesString.join('').replace(/_/g, '').replace(/#/g, 'Ñ');
     }
 
     protected strDateToInt(value: string): number {
         const valueDate = DateTime.fromFormat(`20${value}`, 'yyyyLLdd');
+
         return Math.round(Math.abs(DateTime.fromObject({ year: 2000, month: 1, day: 1 }).diff(valueDate, 'days').days));
     }
 
     protected intTostrDate(value: number): string {
         return DateTime.fromObject({ year: 2000, month: 1, day: 1 })
             .plus({
-                days: value,
+                days: value
             })
             .toFormat('yyLLdd');
     }

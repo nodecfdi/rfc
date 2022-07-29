@@ -13,9 +13,11 @@ export class Rfc {
     public static RFC_FOREIGN = 'XEXX010101000';
 
     public static DISALLOW_GENERIC = 1;
+
     public static DISALLOW_FOREIGN = 2;
 
     private readonly rfc: string;
+
     private readonly length: number;
 
     /** Contains calculated checksum  */
@@ -32,8 +34,8 @@ export class Rfc {
     /**
      * Parse a string and return a new Rfc instance, otherwise will throw an exception.
      *
-     * @param rfc
-     * @throws { InvalidExpressionToParseException }
+     * @param rfc -
+     * @throws InvalidExpressionToParseException
      */
     public static parse(rfc: string): Rfc {
         const parts = RfcParser.parse(rfc);
@@ -43,15 +45,16 @@ export class Rfc {
             `${parts.getMonth()}`.padStart(2, '0'),
             `${parts.getDay()}`.padStart(2, '0'),
             parts.getHKey(),
-            parts.getChecksum(),
+            parts.getChecksum()
         ].join('');
+
         return new Rfc(rfc);
     }
 
     /**
      * Parse a string, if unable to parse will return NULL.
      *
-     * @param rfc
+     * @param rfc -
      */
     public static parseOrNull(rfc: string): Rfc | null {
         try {
@@ -64,7 +67,7 @@ export class Rfc {
     /**
      * Method to create the object if and only you already thrust the contents.
      *
-     * @param rfc
+     * @param rfc -
      */
     public static unparsed(rfc: string): Rfc {
         return new Rfc(rfc);
@@ -73,8 +76,8 @@ export class Rfc {
     /**
      * Create a Rfc object based on its numeric representation.
      *
-     * @param serial
-     * @throws { InvalidIntegerToConvertException }
+     * @param serial -
+     * @throws InvalidIntegerToConvertException
      */
     public static fromSerial(serial: number): Rfc {
         return new Rfc(new RfcIntConverter().intToString(serial));
@@ -131,6 +134,7 @@ export class Rfc {
         if (!this.checksum) {
             this.checksum = new CheckSum().calculate(this.getRfc());
         }
+
         return this.checksum;
     }
 
@@ -149,12 +153,14 @@ export class Rfc {
         if (!this.serial) {
             this.serial = new RfcIntConverter().stringToInt(this.getRfc());
         }
+
         return this.serial;
     }
 
     public static isValid(value: string, flags = 0): boolean {
         try {
             Rfc.checkIsValid(value, flags);
+
             return true;
         } catch (e) {
             return false;
@@ -174,6 +180,7 @@ export class Rfc {
     public static obtainDate(rfc: string): number {
         try {
             const parts = RfcParser.parse(rfc);
+
             return parts.getDate().toMillis();
         } catch (e) {
             return 0;
