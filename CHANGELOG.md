@@ -1,5 +1,11 @@
 # @nodecfdi/rfc ChangeLog
 
+## 1.3.0
+
+### Minor Changes - Drop support to node 12
+
+- Remove support to node version 12
+
 ## 1.2.3
 
 ### Change build tool from microbundle to rollup
