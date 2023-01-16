@@ -16,21 +16,6 @@ export class Rfc {
 
     public static DISALLOW_FOREIGN = 2;
 
-    private readonly rfc: string;
-
-    private readonly length: number;
-
-    /** Contains calculated checksum  */
-    private checksum: string | undefined;
-
-    /** Contains calculated integer representation  */
-    private serial: number | undefined;
-
-    private constructor(rfc: string) {
-        this.rfc = rfc;
-        this.length = this.rfc.length;
-    }
-
     /**
      * Parse a string and return a new Rfc instance, otherwise will throw an exception.
      *
@@ -56,10 +41,12 @@ export class Rfc {
      *
      * @param rfc -
      */
+    // eslint-disable-next-line @typescript-eslint/ban-types
     public static parseOrNull(rfc: string): Rfc | null {
         try {
             return Rfc.parse(rfc);
-        } catch (e) {
+        } catch {
+            // eslint-disable-next-line unicorn/no-null
             return null;
         }
     }
@@ -91,39 +78,86 @@ export class Rfc {
         return new Rfc(Rfc.RFC_FOREIGN);
     }
 
+    public static isValid(value: string, flags = 0): boolean {
+        try {
+            Rfc.checkIsValid(value, flags);
+
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    public static checkIsValid(value: string, flags = 0): void {
+        if (flags & Rfc.DISALLOW_GENERIC && value === Rfc.RFC_GENERIC) {
+            throw new Error('No se permite el RFC genérico para público en general');
+        }
+
+        if (flags & Rfc.DISALLOW_FOREIGN && value === Rfc.RFC_FOREIGN) {
+            throw new Error('No se permite el RFC genérico para operaciones con extranjeros');
+        }
+
+        RfcParser.parse(value);
+    }
+
+    public static obtainDate(rfc: string): number {
+        try {
+            const parts = RfcParser.parse(rfc);
+
+            return parts.getDate().toMillis();
+        } catch {
+            return 0;
+        }
+    }
+
+    private readonly _rfc: string;
+
+    private readonly length: number;
+
+    /** Contains calculated checksum  */
+    private checksum: string | undefined;
+
+    /** Contains calculated integer representation  */
+    private serial: number | undefined;
+
+    private constructor(rfc: string) {
+        this._rfc = rfc;
+        this.length = this._rfc.length;
+    }
+
     /**
      * Return the rfc content, remember that it is a multibyte string
      */
     public getRfc(): string {
-        return this.rfc;
+        return this._rfc;
     }
 
     /**
      * Return true if the RFC corresponds to a "Persona Física"
      */
     public isFisica(): boolean {
-        return 13 === this.length;
+        return this.length === 13;
     }
 
     /**
      * Return true if the RFC corresponds to a "Persona Moral"
      */
     public isMoral(): boolean {
-        return 12 === this.length;
+        return this.length === 12;
     }
 
     /**
      * Return true if the RFC corresponds to a generic local RFC
      */
     public isGeneric(): boolean {
-        return Rfc.RFC_GENERIC === this.rfc;
+        return Rfc.RFC_GENERIC === this._rfc;
     }
 
     /**
      * Return true if the RFC corresponds to a generic foreign RFC
      */
     public isForeign(): boolean {
-        return Rfc.RFC_FOREIGN === this.rfc;
+        return Rfc.RFC_FOREIGN === this._rfc;
     }
 
     /**
@@ -143,7 +177,7 @@ export class Rfc {
      * Be aware that there are some valid RFC with invalid checksum.
      */
     public doesCheckSumMatch(): boolean {
-        return this.calculateChecksum() === this.rfc.charAt(this.length - 1);
+        return this.calculateChecksum() === this._rfc.charAt(this.length - 1);
     }
 
     /**
@@ -157,45 +191,15 @@ export class Rfc {
         return this.serial;
     }
 
-    public static isValid(value: string, flags = 0): boolean {
-        try {
-            Rfc.checkIsValid(value, flags);
-
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
-
-    public static checkIsValid(value: string, flags = 0): void {
-        if (flags & Rfc.DISALLOW_GENERIC && value === Rfc.RFC_GENERIC) {
-            throw new Error('No se permite el RFC genérico para público en general');
-        }
-        if (flags & Rfc.DISALLOW_FOREIGN && value === Rfc.RFC_FOREIGN) {
-            throw new Error('No se permite el RFC genérico para operaciones con extranjeros');
-        }
-        RfcParser.parse(value);
-    }
-
-    public static obtainDate(rfc: string): number {
-        try {
-            const parts = RfcParser.parse(rfc);
-
-            return parts.getDate().toMillis();
-        } catch (e) {
-            return 0;
-        }
-    }
-
     public toString(): string {
-        return this.rfc;
+        return this._rfc;
     }
 
     public toLocaleString(): string {
-        return this.rfc;
+        return this._rfc;
     }
 
     public toJSON(): string {
-        return this.rfc;
+        return this._rfc;
     }
 }

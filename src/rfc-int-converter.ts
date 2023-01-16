@@ -18,9 +18,9 @@ import { InvalidIntegerToConvertException } from './exceptions/invalid-integer-t
 export class RfcIntConverter {
     public static MIN_INTEGER_VALUE = 0;
 
-    public static MAX_INTEGER_VALUE = 331482040243200 - 1; // EXP[last] * BASE[last]
+    public static MAX_INTEGER_VALUE = 331_482_040_243_200 - 1; // EXP[last] * BASE[last]
 
-    public static FISICA_LOWER_BOUND = 11430415180800; // EXP[last]
+    public static FISICA_LOWER_BOUND = 11_430_415_180_800; // EXP[last]
 
     public static FISICA_UPPER_BOUND = RfcIntConverter.MAX_INTEGER_VALUE; // EXP[last]
 
@@ -28,13 +28,13 @@ export class RfcIntConverter {
 
     public static MORAL_UPPER_BOUND = RfcIntConverter.FISICA_LOWER_BOUND - 1; // EXP[last] - 1
 
-    private BASES = [11, 36, 36, 36525, 28, 28, 28, 29];
+    private readonly BASES = [11, 36, 36, 36_525, 28, 28, 28, 29];
 
-    private EXP = [1, 11, 396, 14256, 520700400, 14579611200, 408229113600, 11430415180800];
+    private readonly EXP = [1, 11, 396, 14_256, 520_700_400, 14_579_611_200, 408_229_113_600, 11_430_415_180_800];
 
-    private CSUM_INT_CHAR = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A'];
+    private readonly CSUM_INT_CHAR = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A'];
 
-    private CSUM_CHAR_INT: Record<string, number> = {
+    private readonly CSUM_CHAR_INT: Record<string, number> = {
         0: 0,
         1: 1,
         2: 2,
@@ -48,7 +48,7 @@ export class RfcIntConverter {
         A: 10
     };
 
-    private HKEY_INT_CHAR = [
+    private readonly HKEY_INT_CHAR = [
         '0',
         '1',
         '2',
@@ -87,7 +87,7 @@ export class RfcIntConverter {
         'Z'
     ];
 
-    private HKEY_CHAR_INT: Record<string, number> = {
+    private readonly HKEY_CHAR_INT: Record<string, number> = {
         '0': 0,
         '1': 1,
         '2': 2,
@@ -126,7 +126,7 @@ export class RfcIntConverter {
         'Z': 35
     };
 
-    private NAME_REQ_INT_CHAR = [
+    private readonly NAME_REQ_INT_CHAR = [
         'A',
         'B',
         'C',
@@ -157,7 +157,7 @@ export class RfcIntConverter {
         '#'
     ];
 
-    private NAME_REQ_CHAR_INT: Record<string, number> = {
+    private readonly NAME_REQ_CHAR_INT: Record<string, number> = {
         'A': 0,
         'B': 1,
         'C': 2,
@@ -188,7 +188,7 @@ export class RfcIntConverter {
         '#': 27
     };
 
-    private NAME_OPT_INT_CHAR = [
+    private readonly NAME_OPT_INT_CHAR = [
         '_',
         'A',
         'B',
@@ -220,7 +220,7 @@ export class RfcIntConverter {
         '#'
     ];
 
-    private NAME_OPT_CHAR_INT: Record<string, number> = {
+    private readonly NAME_OPT_CHAR_INT: Record<string, number> = {
         '_': 0,
         'A': 1,
         'B': 2,
@@ -265,7 +265,7 @@ export class RfcIntConverter {
             this.EXP[0] * this.CSUM_CHAR_INT[vString.charAt(12)],
             this.EXP[1] * this.HKEY_CHAR_INT[vString.charAt(11)],
             this.EXP[2] * this.HKEY_CHAR_INT[vString.charAt(10)],
-            this.EXP[3] * this.strDateToInt(vString.substring(4, 10)),
+            this.EXP[3] * this.strDateToInt(vString.slice(4, 10)),
             this.EXP[4] * this.NAME_REQ_CHAR_INT[vString.charAt(3)],
             this.EXP[5] * this.NAME_REQ_CHAR_INT[vString.charAt(2)],
             this.EXP[6] * this.NAME_REQ_CHAR_INT[vString.charAt(1)],
@@ -285,15 +285,18 @@ export class RfcIntConverter {
         if (value < 0) {
             throw InvalidIntegerToConvertException.lowerThanZero(value);
         }
+
         if (value > RfcIntConverter.MAX_INTEGER_VALUE) {
             throw InvalidIntegerToConvertException.greaterThanMaximum(value);
         }
+
         const integers: number[] = [];
-        this.BASES.forEach((base: number) => {
+        for (const base of this.BASES) {
             const integer = value % base;
             value = (value - integer) / base;
             integers.push(integer);
-        });
+        }
+
         const valuesString: string[] = [
             this.NAME_OPT_INT_CHAR[integers[7]],
             this.NAME_REQ_INT_CHAR[integers[6]],

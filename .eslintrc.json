@@ -8,8 +8,9 @@
     },
     "rules": {
         // Eslint suite rules
-        "max-params": ["error", 5],
+        "max-params": ["error", 7],
         "new-cap": ["error", { "capIsNew": false }],
+        "no-bitwise": ["error", { "allow": ["&", "|"] }],
         "semi": "error",
         "quotes": [
             "error",
@@ -21,6 +22,7 @@
         ],
 
         // Typescript rules
+        "@typescript-eslint/restrict-template-expressions": "off",
         "@typescript-eslint/explicit-function-return-type": [
             "error",
             {

@@ -1,7 +1,7 @@
 import { Rfc } from '~/rfc';
 import { DateTime } from 'luxon';
 
-describe('Rfc', () => {
+describe('RFC', () => {
     test('create rfc persona fisica', () => {
         const input = 'COSC8001137NA';
         const rfc = Rfc.unparsed(input);
@@ -13,7 +13,7 @@ describe('Rfc', () => {
         expect(rfc.isFisica()).toBeTruthy();
         expect(rfc.calculateChecksum()).toBe('A');
         expect(rfc.doesCheckSumMatch()).toBeTruthy();
-        expect(rfc.calculateSerial()).toBe(40270344269627);
+        expect(rfc.calculateSerial()).toBe(40_270_344_269_627);
     });
 
     test('create rfc moral', () => {
@@ -27,7 +27,7 @@ describe('Rfc', () => {
         expect(rfc.isFisica()).toBeFalsy();
         expect(rfc.calculateChecksum()).toBe('A');
         expect(rfc.doesCheckSumMatch()).toBeTruthy();
-        expect(rfc.calculateSerial()).toBe(1348025748541);
+        expect(rfc.calculateSerial()).toBe(1_348_025_748_541);
     });
 
     test('create with foreign', () => {
@@ -46,7 +46,7 @@ describe('Rfc', () => {
         expect(rfc.isMoral()).toBeFalsy();
     });
 
-    test('parse', () => {
+    test('parse with correct data', () => {
         const rfc = Rfc.parse('COSC8001137NA');
         expect(`${rfc}`).toBe('COSC8001137NA');
         expect(rfc.toString()).toBe('COSC8001137NA');
@@ -63,12 +63,12 @@ describe('Rfc', () => {
     });
 
     test('serial number', () => {
-        const rfc = Rfc.fromSerial(1348025748541);
-        // current serial is undefined.
-        expect(rfc.calculateSerial()).toBe(1348025748541);
+        const rfc = Rfc.fromSerial(1_348_025_748_541);
+        // Current serial is undefined.
+        expect(rfc.calculateSerial()).toBe(1_348_025_748_541);
         expect(rfc.getRfc()).toBe('DIM8701081LA');
-        // current serial is defined.
-        expect(rfc.calculateSerial()).toBe(1348025748541);
+        // Current serial is defined.
+        expect(rfc.calculateSerial()).toBe(1_348_025_748_541);
     });
 
     test('create bad digit', () => {
@@ -108,19 +108,25 @@ describe('Rfc', () => {
     });
 
     test('not trown nothing on default', () => {
-        const t = (): void => Rfc.checkIsValid(Rfc.RFC_GENERIC);
+        const t = (): void => {
+            Rfc.checkIsValid(Rfc.RFC_GENERIC);
+        };
 
         expect(t).not.toThrow('público en general');
     });
 
     test('invalid disallow generic', () => {
-        const t = (): void => Rfc.checkIsValid(Rfc.RFC_GENERIC, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
+        const t = (): void => {
+            Rfc.checkIsValid(Rfc.RFC_GENERIC, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
+        };
 
         expect(t).toThrow('público en general');
     });
 
     test('invalid disallow foreign', () => {
-        const t = (): void => Rfc.checkIsValid(Rfc.RFC_FOREIGN, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
+        const t = (): void => {
+            Rfc.checkIsValid(Rfc.RFC_FOREIGN, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
+        };
 
         expect(t).toThrow('operaciones con extranjeros');
     });
@@ -137,7 +143,7 @@ describe('Rfc', () => {
         const expected = DateTime.fromISO('2000-02-29').toMillis();
         expect(Rfc.obtainDate('XXX000229XX6')).toBe(expected);
 
-        // invalid leap year
+        // Invalid leap year
         expect(Rfc.obtainDate('XXX030229XX6')).toBe(0);
     });
 
@@ -152,7 +158,7 @@ describe('Rfc', () => {
         ['ABCD010A01AAA'],
         ['ABCD01010AAAA'],
         ['ABCD-10123AAA']
-    ])('obtain date with invalid input', (rfc: string) => {
+    ])('obtain date with invalid input %s', (rfc: string) => {
         expect(Rfc.obtainDate(rfc)).toBe(0);
     });
 });

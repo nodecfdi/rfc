@@ -9,25 +9,25 @@ describe('RfcFaker', () => {
         faker = new RfcFaker();
     });
 
-    test('mexican rfc', () => {
-        for (let i = 0; i < iterations; i++) {
-            const strRfc = faker.mexicanRfc();
-            expect(Rfc.parseOrNull(strRfc)).not.toBeNull();
+    test('mexican rfc not null', () => {
+        for (let index = 0; index < iterations; index++) {
+            const stringRfc = faker.mexicanRfc();
+            expect(Rfc.parseOrNull(stringRfc)).not.toBeNull();
         }
     });
 
     test('mexican rfc persona fisica', () => {
-        for (let i = 0; i < iterations; i++) {
-            const strRfc = faker.mexicanRfcFisica();
-            const rfc = Rfc.parse(strRfc);
+        for (let index = 0; index < iterations; index++) {
+            const stringRfc = faker.mexicanRfcFisica();
+            const rfc = Rfc.parse(stringRfc);
             expect(rfc.isFisica()).toBeTruthy();
         }
     });
 
     test('mexican rfc persona moral', () => {
-        for (let i = 0; i < iterations; i++) {
-            const strRfc = faker.mexicanRfcMoral();
-            const rfc = Rfc.parse(strRfc);
+        for (let index = 0; index < iterations; index++) {
+            const stringRfc = faker.mexicanRfcMoral();
+            const rfc = Rfc.parse(stringRfc);
             expect(rfc.isMoral()).toBeTruthy();
         }
     });

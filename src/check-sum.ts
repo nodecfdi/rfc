@@ -1,5 +1,5 @@
 export class CheckSum {
-    private DICTIONARY: Record<string, number> = {
+    private readonly DICTIONARY: Record<string, number> = {
         '0': 0,
         '1': 1,
         '2': 2,
@@ -42,17 +42,18 @@ export class CheckSum {
     };
 
     public calculate(rfc: string): string {
-        const chars = rfc.replace(/Ñ/g, '#').split('');
-        chars.pop(); // remove predefined checksum
-        let sum = 11 === chars.length ? 481 : 0; // 481 para morales, 0 para físicas
-        const j = chars.length + 1;
-        chars.forEach((char, i) => {
-            sum += (this.DICTIONARY[char] || 0) * (j - i);
-        });
+        const chars = [...rfc.replace(/Ñ/g, '#')];
+        chars.pop(); // Remove predefined checksum
+        let sum = chars.length === 11 ? 481 : 0; // 481 para morales, 0 para físicas
+        const index = chars.length + 1;
+        for (const [index_, char] of chars.entries()) {
+            sum += (this.DICTIONARY[char] || 0) * (index - index_);
+        }
+
         let digit = `${11 - (sum % 11)}`;
-        if ('11' === digit) {
+        if (digit === '11') {
             digit = '0';
-        } else if ('10' === digit) {
+        } else if (digit === '10') {
             digit = 'A';
         }
 

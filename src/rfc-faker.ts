@@ -10,7 +10,7 @@ export class RfcFaker {
      * @example COSC8001137NA, EKU9003173C9
      */
     public mexicanRfc(): string {
-        // from moral to fisica, moral is lower than fisica
+        // From moral to fisica, moral is lower than fisica
         return this.privateMakeRfc(RfcIntConverter.MORAL_LOWER_BOUND, RfcIntConverter.FISICA_UPPER_BOUND);
     }
 
