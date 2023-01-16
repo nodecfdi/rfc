@@ -1,5 +1,15 @@
 # @nodecfdi/rfc ChangeLog
 
+## 1.2.3
+
+### Change build tool from microbundle to rollup
+
+- Change build tool
+- Update dependencies
+- Added api-extractor for check types `.d.ts`
+- Replace microbundle to rollup
+- Replace jest for vitest (added support to multiple environment tests like a node or browser)
+
 ## 1.2.2
 
 ## CI
