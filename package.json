@@ -11,33 +11,37 @@
     "author": "OcelotlStudio <contacto@ocelotlstudio.com>",
     "license": "MIT",
     "type": "module",
-    "main": "./dist/prod/rfc.cjs",
-    "module": "./dist/prod/rfc.modern.js",
-    "unpkg": "./dist/prod/rfc.umd.js",
+    "main": "dist/rfc.js",
+    "module": "dist/rfc.mjs",
+    "unpkg": "dist/rfc.global.js",
+    "browser": "dist/rfc.global.js",
+    "types": "./dist/index.d.ts",
     "exports": {
-        "require": "./dist/prod/rfc.cjs",
-        "development": "./dist/dev/rfc.modern.js",
-        "default": "./dist/prod/rfc.modern.js"
+        ".": {
+            "browser": {
+                "default": "./dist/rfc.global.js"
+            },
+            "import": "./dist/rfc.mjs",
+            "require": "./dist/rfc.js"
+        }
     },
-    "types": "dist/types/index.d.ts",
     "files": [
         "dist"
     ],
     "scripts": {
-        "lint": "eslint --fix \"src/**/\"",
-        "lint:check": "eslint \"src/**/\"",
-        "lint:ci": "pnpm lint:check",
-        "test": "jest --verbose --coverage",
-        "test:watch": "jest --watch",
-        "test:ci": "jest --runInBand --ci",
-        "test:ci:coverage": "jest --runInBand --ci --coverage --coverageDirectory=coverage",
-        "build:prod": "cross-env NODE_ENV=production microbundle --tsconfig ./tsconfig.json  --format modern,cjs,umd --output dist/prod/rfc.js",
-        "build:dev": "cross-env NODE_ENV=development microbundle --define process.env.NODE_ENV=development --tsconfig ./tsconfig.json --generateTypes false --format modern --output dist/dev/rfc.js",
-        "build": "rm -rf ./dist && pnpm build:dev && pnpm build:prod",
-        "gen:docs": "rm -rf ./docs && typedoc --options typedoc.cjs",
-        "prepublishOnly": "pnpm build",
-        "prepare": "husky install",
-        "release": "pnpm run prepublishOnly && pnpm changeset publish"
+        "preinstall": "npx only-allow pnpm",
+        "prepare": "is-ci || husky install",
+        "lint": "eslint --fix --ext .js,.ts .",
+        "lint:check": "eslint --ext .js,.ts .",
+        "format": "prettier --write \"**/*.{js,ts,json}\"",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:coverage": "vitest run --coverage",
+        "build": "pnpm prebuild && rollup -c && pnpm gen:types && rimraf dist/dts",
+        "prebuild": "rimraf dist",
+        "gen:docs": "rimraf docs && typedoc --options typedoc.json",
+        "gen:types": "api-extractor run --local",
+        "release": "pnpm run build && pnpm changeset publish"
     },
     "repository": "https://github.com/nodecfdi/rfc",
     "bugs": {
@@ -45,41 +49,52 @@
     },
     "homepage": "https://github.com/nodecfdi/rfc",
     "devDependencies": {
-        "@babel/core": "^7.18.9",
-        "@babel/preset-env": "^7.18.9",
-        "@babel/preset-typescript": "^7.18.6",
-        "@changesets/cli": "^2.24.1",
-        "@commitlint/cli": "^17.0.3",
-        "@commitlint/config-conventional": "^17.0.3",
-        "@types/jest": "^28.1.6",
-        "@types/luxon": "^3.0.0",
-        "@types/node": "^18.6.2",
-        "@typescript-eslint/eslint-plugin": "^5.31.0",
-        "@typescript-eslint/parser": "^5.31.0",
-        "babel-plugin-dev-expression": "^0.2.3",
-        "babel-plugin-transform-define": "^2.0.1",
-        "cross-env": "^7.0.3",
-        "eslint": "^8.20.0",
-        "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-jest": "^26.6.0",
-        "eslint-plugin-prettier": "^4.2.1",
-        "eslint-plugin-promise": "^6.0.0",
-        "eslint-plugin-tsdoc": "^0.2.16",
-        "husky": "^8.0.1",
-        "jest": "^28.1.3",
-        "jest-mock-console": "^2.0.0",
-        "jest-watch-typeahead": "^2.0.0",
-        "lint-staged": "^13.0.3",
-        "microbundle": "^0.15.0",
-        "prettier": "^2.7.1",
-        "shx": "^0.3.4",
-        "typedoc": "^0.23.9",
-        "typedoc-theme-hierarchy": "^3.0.0",
-        "typescript": "^4.7.4",
-        "zx": "^7.0.7"
+        "@changesets/cli": "^2.26.0",
+        "@commitlint/cli": "^17.4.2",
+        "@microsoft/api-extractor": "^7.33.7",
+        "@nrsk/config-conventional": "^1.0.0",
+        "@rollup/plugin-commonjs": "^24.0.0",
+        "@rollup/plugin-node-resolve": "^15.0.1",
+        "@rollup/plugin-terser": "^0.3.0",
+        "@rollup/plugin-typescript": "^11.0.0",
+        "@types/is-ci": "^3.0.0",
+        "@types/node": "^18.11.18",
+        "@typescript-eslint/eslint-plugin": "^5.48.2",
+        "@typescript-eslint/parser": "^5.48.2",
+        "@vitest/coverage-istanbul": "^0.27.1",
+        "eslint": "^8.32.0",
+        "eslint-config-prettier": "^8.6.0",
+        "eslint-config-xo": "^0.43.1",
+        "eslint-config-xo-typescript": "^0.55.1",
+        "eslint-plugin-tsdoc": "^0.2.17",
+        "eslint-plugin-unicorn": "^45.0.2",
+        "husky": "^8.0.3",
+        "is-ci": "^3.0.1",
+        "lint-staged": "^13.1.0",
+        "prettier": "^2.8.3",
+        "rimraf": "^4.0.7",
+        "rollup": "^3.10.0",
+        "typedoc": "^0.23.24",
+        "typedoc-theme-hierarchy": "^3.0.2",
+        "typescript": "^4.9.4",
+        "vite": "^4.0.4",
+        "vitest": "^0.27.1"
     },
     "dependencies": {
-        "luxon": "^3.0.1"
+        "luxon": "^3.2.1"
+    },
+    "commitlint": {
+        "extends": [
+            "@nrsk/config-conventional"
+        ]
+    },
+    "lint-staged": {
+        "*.{js,ts,json}": [
+            "prettier --write"
+        ],
+        "*.{js,ts}": [
+            "eslint --fix"
+        ]
     },
     "engines": {
         "node": ">= 12.0.0"
