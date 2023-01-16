@@ -8,7 +8,7 @@ const name = 'dist/rfc';
 const bundle = (config) => ({
     ...config,
     input: 'src/index.ts',
-    external: []
+    external: ['luxon']
 });
 
 export default [
@@ -27,6 +27,9 @@ export default [
             },
             {
                 name: 'rfc',
+                globals: {
+                    luxon: 'luxon'
+                },
                 file: `${name}.global.js`,
                 format: 'iife',
                 sourcemap: true
