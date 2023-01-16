@@ -2,45 +2,6 @@ import { DateTime } from 'luxon';
 import { InvalidExpressionToParseException } from './exceptions/invalid-expression-to-parse-exception';
 
 export class RfcParser {
-    /** "siglas" part ____000101AAA */
-    private readonly name: string;
-
-    /** "año" part AAAA__0101AAA */
-    private readonly year: number;
-
-    /** "mes" part AAAA00__01AAA */
-    private readonly month: number;
-
-    /** "día" part AAAA0001__AAA */
-    private readonly day: number;
-
-    /** "homoclave" part AAAA000101__A */
-    private readonly hKey: string;
-
-    /** "dígito verificador" part AAAA000101AA_ */
-    private readonly checksum: string;
-
-    /** converter datetime of current rfc */
-    private readonly date: DateTime;
-
-    private constructor(
-        name: string,
-        year: number,
-        month: number,
-        day: number,
-        hKey: string,
-        checksum: string,
-        date: DateTime
-    ) {
-        this.name = name;
-        this.year = year;
-        this.month = month;
-        this.day = day;
-        this.hKey = hKey;
-        this.checksum = checksum;
-        this.date = date;
-    }
-
     /**
      * @param rfc -
      * @throws InvalidExpressionToParseException
@@ -64,8 +25,8 @@ export class RfcParser {
          */
         const regex =
             /^(?<name>[A-ZÑ&]{3,4})(?<year>\d{2})(?<month>\d{2})(?<day>\d{2})(?<hkey>[A-Z0-9]{2})(?<checksum>[A0-9])$/u;
-        const matches = rfc.toUpperCase().match(regex);
-        if (!matches || !matches.groups) throw new Error('The RFC expression does not contain the valid parts');
+        const matches = regex.exec(rfc.toUpperCase());
+        if (!matches?.groups) throw new Error('The RFC expression does not contain the valid parts');
         const date = DateTime.fromISO(`20${matches.groups.year}-${matches.groups.month}-${matches.groups.day}`);
         if (`${matches.groups.year}${matches.groups.month}${matches.groups.day}` !== date.toFormat('yyLLdd')) {
             throw InvalidExpressionToParseException.invalidDate(rfc);
@@ -82,31 +43,70 @@ export class RfcParser {
         );
     }
 
+    /** "siglas" part ____000101AAA */
+    private readonly _name: string;
+
+    /** "año" part AAAA__0101AAA */
+    private readonly _year: number;
+
+    /** "mes" part AAAA00__01AAA */
+    private readonly _month: number;
+
+    /** "día" part AAAA0001__AAA */
+    private readonly _day: number;
+
+    /** "homoclave" part AAAA000101__A */
+    private readonly _hKey: string;
+
+    /** "dígito verificador" part AAAA000101AA_ */
+    private readonly _checksum: string;
+
+    /** Converter datetime of current rfc */
+    private readonly _date: DateTime;
+
+    private constructor(
+        name: string,
+        year: number,
+        month: number,
+        day: number,
+        hKey: string,
+        checksum: string,
+        date: DateTime
+    ) {
+        this._name = name;
+        this._year = year;
+        this._month = month;
+        this._day = day;
+        this._hKey = hKey;
+        this._checksum = checksum;
+        this._date = date;
+    }
+
     public getName(): string {
-        return this.name;
+        return this._name;
     }
 
     public getYear(): number {
-        return this.year;
+        return this._year;
     }
 
     public getMonth(): number {
-        return this.month;
+        return this._month;
     }
 
     public getDay(): number {
-        return this.day;
+        return this._day;
     }
 
     public getHKey(): string {
-        return this.hKey;
+        return this._hKey;
     }
 
     public getChecksum(): string {
-        return this.checksum;
+        return this._checksum;
     }
 
     public getDate(): DateTime {
-        return this.date;
+        return this._date;
     }
 }

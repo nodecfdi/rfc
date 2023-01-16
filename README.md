@@ -31,14 +31,20 @@ Librería inspirada por la versión para php <https://github.com/phpcfdi/rfc>
 
 ### Node NPM
 
-```shell
+```bash
 npm i @nodecfdi/rfc --save
 ```
 
-### Yarn NPM
+### Yarn
 
-```shell
+```bash
 yarn add @nodecfdi/rfc
+```
+
+### Pnpm
+
+```bash
+pnpm add @nodecfdi/rfc
 ```
 
 ## Uso básico
@@ -145,7 +151,7 @@ The `@nodecfdi/rfc` library is copyright © [NodeCfdi](https://github.com/nodecf
 [badge-discord]: https://img.shields.io/discord/459860554090283019?logo=discord
 [badge-release]: https://img.shields.io/npm/v/@nodecfdi/rfc.svg?logo=npm
 [badge-license]: https://img.shields.io/github/license/nodecfdi/rfc.svg?logo=open-source-initiative
-[badge-build]: https://img.shields.io/github/workflow/status/nodecfdi/rfc/build/main?logo=github-actions
+[badge-build]: https://img.shields.io/github/actions/workflow/status/nodecfdi/rfc/build.yml?branch=main
 [badge-reliability]: https://sonarcloud.io/api/project_badges/measure?project=nodecfdi_rfc&metric=reliability_rating
 [badge-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=nodecfdi_rfc&metric=sqale_rating
 [badge-coverage]: https://img.shields.io/sonar/coverage/nodecfdi_rfc/main?logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io

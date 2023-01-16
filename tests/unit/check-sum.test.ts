@@ -7,7 +7,7 @@ describe('CheckSum', () => {
         checksum = new CheckSum();
     });
 
-    test('check sum', () => {
+    test('check sum with rfc persona fisica', () => {
         const expected = 'A';
         const rfc = 'COSC8001137NA';
 
@@ -19,5 +19,9 @@ describe('CheckSum', () => {
         const rfc = 'AÑÑ801231JK0';
 
         expect(checksum.calculate(rfc)).toBe(expected);
+    });
+
+    test('check sum with rfc moral', () => {
+        expect(checksum.calculate('IDE2001209V6')).toBe('6');
     });
 });
