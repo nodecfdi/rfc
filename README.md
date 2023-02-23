@@ -29,22 +29,30 @@ Librería inspirada por la versión para php <https://github.com/phpcfdi/rfc>
 
 ## Instalación
 
-### Node NPM
+NPM
 
 ```bash
 npm i @nodecfdi/rfc --save
 ```
 
-### Yarn
+YARN
 
 ```bash
 yarn add @nodecfdi/rfc
 ```
 
-### Pnpm
+PNPM
 
 ```bash
 pnpm add @nodecfdi/rfc
+```
+
+CDN - Browser
+
+Usa la versión mas reciente publicada cambiando `<latest-version>` por la última version. Ex. ...rfc@1.3.1/dist...
+
+```html
+<script src="https://unpkg.com/@nodecfdi/rfc@<latest-version>/dist/rfc.global.js"></script>
 ```
 
 ## Uso básico
