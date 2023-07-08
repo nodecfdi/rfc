@@ -17,23 +17,29 @@ import { InvalidIntegerToConvertException } from './exceptions/invalid-integer-t
  */
 export class RfcIntConverter {
     public static MIN_INTEGER_VALUE = 0;
-
     public static MAX_INTEGER_VALUE = 331_482_040_243_200 - 1; // EXP[last] * BASE[last]
-
     public static FISICA_LOWER_BOUND = 11_430_415_180_800; // EXP[last]
-
     public static FISICA_UPPER_BOUND = RfcIntConverter.MAX_INTEGER_VALUE; // EXP[last]
-
     public static MORAL_LOWER_BOUND = RfcIntConverter.MIN_INTEGER_VALUE;
-
     public static MORAL_UPPER_BOUND = RfcIntConverter.FISICA_LOWER_BOUND - 1; // EXP[last] - 1
-
     private readonly BASES = [11, 36, 36, 36_525, 28, 28, 28, 29];
-
-    private readonly EXP = [1, 11, 396, 14_256, 520_700_400, 14_579_611_200, 408_229_113_600, 11_430_415_180_800];
-
-    private readonly CSUM_INT_CHAR = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A'];
-
+    private readonly EXP = [
+        1, 11, 396, 14_256, 520_700_400, 14_579_611_200, 408_229_113_600,
+        11_430_415_180_800,
+    ];
+    private readonly CSUM_INT_CHAR = [
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        'A',
+    ];
     private readonly CSUM_CHAR_INT: Record<string, number> = {
         0: 0,
         1: 1,
@@ -45,9 +51,8 @@ export class RfcIntConverter {
         7: 7,
         8: 8,
         9: 9,
-        A: 10
+        A: 10,
     };
-
     private readonly HKEY_INT_CHAR = [
         '0',
         '1',
@@ -84,9 +89,8 @@ export class RfcIntConverter {
         'W',
         'X',
         'Y',
-        'Z'
+        'Z',
     ];
-
     private readonly HKEY_CHAR_INT: Record<string, number> = {
         '0': 0,
         '1': 1,
@@ -123,9 +127,8 @@ export class RfcIntConverter {
         'W': 32,
         'X': 33,
         'Y': 34,
-        'Z': 35
+        'Z': 35,
     };
-
     private readonly NAME_REQ_INT_CHAR = [
         'A',
         'B',
@@ -154,9 +157,8 @@ export class RfcIntConverter {
         'Y',
         'Z',
         '&',
-        '#'
+        '#',
     ];
-
     private readonly NAME_REQ_CHAR_INT: Record<string, number> = {
         'A': 0,
         'B': 1,
@@ -185,9 +187,8 @@ export class RfcIntConverter {
         'Y': 24,
         'Z': 25,
         '&': 26,
-        '#': 27
+        '#': 27,
     };
-
     private readonly NAME_OPT_INT_CHAR = [
         '_',
         'A',
@@ -217,9 +218,8 @@ export class RfcIntConverter {
         'Y',
         'Z',
         '&',
-        '#'
+        '#',
     ];
-
     private readonly NAME_OPT_CHAR_INT: Record<string, number> = {
         '_': 0,
         'A': 1,
@@ -249,7 +249,7 @@ export class RfcIntConverter {
         'Y': 25,
         'Z': 26,
         '&': 27,
-        '#': 28
+        '#': 28,
     };
 
     /**
@@ -260,7 +260,7 @@ export class RfcIntConverter {
      * @param rfc -
      */
     public stringToInt(rfc: string): number {
-        const vString = rfc.replace(/Ñ/g, '#').padStart(13, '_');
+        const vString = rfc.replaceAll('Ñ', '#').padStart(13, '_');
         const integers = [
             this.EXP[0] * this.CSUM_CHAR_INT[vString.charAt(12)],
             this.EXP[1] * this.HKEY_CHAR_INT[vString.charAt(11)],
@@ -269,7 +269,7 @@ export class RfcIntConverter {
             this.EXP[4] * this.NAME_REQ_CHAR_INT[vString.charAt(3)],
             this.EXP[5] * this.NAME_REQ_CHAR_INT[vString.charAt(2)],
             this.EXP[6] * this.NAME_REQ_CHAR_INT[vString.charAt(1)],
-            this.EXP[7] * this.NAME_OPT_CHAR_INT[vString.charAt(0)]
+            this.EXP[7] * this.NAME_OPT_CHAR_INT[vString.charAt(0)],
         ];
 
         return integers.reduce((a, b) => a + b, 0);
@@ -305,22 +305,29 @@ export class RfcIntConverter {
             this.intTostrDate(integers[3]),
             this.HKEY_INT_CHAR[integers[2]],
             this.HKEY_INT_CHAR[integers[1]],
-            this.CSUM_INT_CHAR[integers[0]]
+            this.CSUM_INT_CHAR[integers[0]],
         ];
 
-        return valuesString.join('').replace(/_/g, '').replace(/#/g, 'Ñ');
+        return valuesString.join('').replaceAll('_', '').replaceAll('#', 'Ñ');
     }
 
     protected strDateToInt(value: string): number {
         const valueDate = DateTime.fromFormat(`20${value}`, 'yyyyLLdd');
 
-        return Math.round(Math.abs(DateTime.fromObject({ year: 2000, month: 1, day: 1 }).diff(valueDate, 'days').days));
+        return Math.round(
+            Math.abs(
+                DateTime.fromObject({ year: 2000, month: 1, day: 1 }).diff(
+                    valueDate,
+                    'days'
+                ).days
+            )
+        );
     }
 
     protected intTostrDate(value: number): string {
         return DateTime.fromObject({ year: 2000, month: 1, day: 1 })
             .plus({
-                days: value
+                days: value,
             })
             .toFormat('yyLLdd');
     }

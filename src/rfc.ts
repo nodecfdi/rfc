@@ -8,13 +8,21 @@ import { CheckSum } from './check-sum';
 export class Rfc {
     /** Generic representation of an RFC (some use cases include to invoice without RFC) */
     public static RFC_GENERIC = 'XAXX010101000';
-
     /** Foreign representation of RFC (used on foreign parties that does not have mexican RFC) */
     public static RFC_FOREIGN = 'XEXX010101000';
-
     public static DISALLOW_GENERIC = 1;
-
     public static DISALLOW_FOREIGN = 2;
+    private readonly _rfc: string;
+    private readonly length: number;
+    /** Contains calculated checksum  */
+    private checksum: string | undefined;
+    /** Contains calculated integer representation  */
+    private serial: number | undefined;
+
+    private constructor(rfc: string) {
+        this._rfc = rfc;
+        this.length = this._rfc.length;
+    }
 
     /**
      * Parse a string and return a new Rfc instance, otherwise will throw an exception.
@@ -30,7 +38,7 @@ export class Rfc {
             `${parts.getMonth()}`.padStart(2, '0'),
             `${parts.getDay()}`.padStart(2, '0'),
             parts.getHKey(),
-            parts.getChecksum()
+            parts.getChecksum(),
         ].join('');
 
         return new Rfc(rfc);
@@ -41,12 +49,10 @@ export class Rfc {
      *
      * @param rfc -
      */
-    // eslint-disable-next-line @typescript-eslint/ban-types
     public static parseOrNull(rfc: string): Rfc | null {
         try {
             return Rfc.parse(rfc);
         } catch {
-            // eslint-disable-next-line unicorn/no-null
             return null;
         }
     }
@@ -90,11 +96,15 @@ export class Rfc {
 
     public static checkIsValid(value: string, flags = 0): void {
         if (flags & Rfc.DISALLOW_GENERIC && value === Rfc.RFC_GENERIC) {
-            throw new Error('No se permite el RFC genérico para público en general');
+            throw new Error(
+                'No se permite el RFC genérico para público en general'
+            );
         }
 
         if (flags & Rfc.DISALLOW_FOREIGN && value === Rfc.RFC_FOREIGN) {
-            throw new Error('No se permite el RFC genérico para operaciones con extranjeros');
+            throw new Error(
+                'No se permite el RFC genérico para operaciones con extranjeros'
+            );
         }
 
         RfcParser.parse(value);
@@ -108,21 +118,6 @@ export class Rfc {
         } catch {
             return 0;
         }
-    }
-
-    private readonly _rfc: string;
-
-    private readonly length: number;
-
-    /** Contains calculated checksum  */
-    private checksum: string | undefined;
-
-    /** Contains calculated integer representation  */
-    private serial: number | undefined;
-
-    private constructor(rfc: string) {
-        this._rfc = rfc;
-        this.length = this._rfc.length;
     }
 
     /**

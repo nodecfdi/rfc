@@ -1,5 +1,5 @@
-import { Rfc } from '~/rfc';
-import { RfcFaker } from '~/rfc-faker';
+import { Rfc } from 'src/rfc';
+import { RfcFaker } from 'src/rfc-faker';
 
 describe('RfcFaker', () => {
     const iterations = 100;
@@ -9,14 +9,14 @@ describe('RfcFaker', () => {
         faker = new RfcFaker();
     });
 
-    test('mexican rfc not null', () => {
+    test('mexican_rfc_not_null', () => {
         for (let index = 0; index < iterations; index++) {
             const stringRfc = faker.mexicanRfc();
             expect(Rfc.parseOrNull(stringRfc)).not.toBeNull();
         }
     });
 
-    test('mexican rfc persona fisica', () => {
+    test('mexican_rfc_persona_fisica', () => {
         for (let index = 0; index < iterations; index++) {
             const stringRfc = faker.mexicanRfcFisica();
             const rfc = Rfc.parse(stringRfc);
@@ -24,7 +24,7 @@ describe('RfcFaker', () => {
         }
     });
 
-    test('mexican rfc persona moral', () => {
+    test('mexican_rfc_persona_moral', () => {
         for (let index = 0; index < iterations; index++) {
             const stringRfc = faker.mexicanRfcMoral();
             const rfc = Rfc.parse(stringRfc);

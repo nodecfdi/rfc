@@ -38,11 +38,11 @@ export class CheckSum {
         'Y': 35,
         'Z': 36,
         ' ': 37,
-        '#': 38
+        '#': 38,
     };
 
     public calculate(rfc: string): string {
-        const chars = [...rfc.replace(/Ñ/g, '#')];
+        const chars = [...rfc.replaceAll('Ñ', '#')];
         chars.pop(); // Remove predefined checksum
         let sum = chars.length === 11 ? 481 : 0; // 481 para morales, 0 para físicas
         const index = chars.length + 1;
