@@ -40,23 +40,25 @@ export class CheckSum {
         ' ': 37,
         '#': 38,
     };
+    private readonly DIGIT_OVERRIDE: Record<number, string> = {
+        10: 'A',
+        11: '0',
+    };
 
     public calculate(rfc: string): string {
         const chars = [...rfc.replaceAll('Ñ', '#')];
-        chars.pop(); // Remove predefined checksum
-        let sum = chars.length === 11 ? 481 : 0; // 481 para morales, 0 para físicas
-        const index = chars.length + 1;
-        for (const [index_, char] of chars.entries()) {
-            sum += (this.DICTIONARY[char] || 0) * (index - index_);
+        const length = chars.length;
+        chars.pop(); // remover el dígito predefinido
+
+        // Valor inicial de la suma: 481 para morales, 0 para físicas
+        let sum = length === 12 ? 481 : 0;
+        for (const [i, char] of chars.entries()) {
+            sum += (this.DICTIONARY[char] || 0) * (length - i);
         }
 
-        let digit = `${11 - (sum % 11)}`;
-        if (digit === '11') {
-            digit = '0';
-        } else if (digit === '10') {
-            digit = 'A';
-        }
-
-        return digit;
+        // posibles valores: [1, 2, ..., 10, 11] porque sum % 11 = int<0, 10>
+        const digit = 11 - (sum % 11);
+        // se retorna 10 => 0, 11 => A o el valor obtenido
+        return this.DIGIT_OVERRIDE[digit] || digit.toString();
     }
 }
