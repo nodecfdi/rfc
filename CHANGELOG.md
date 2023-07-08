@@ -1,5 +1,15 @@
 # @nodecfdi/rfc ChangeLog
 
+## 1.3.2 - Maintenance and Small Optimizations
+
+- Update class `Checksums` with small optimization
+- Update dependencis
+- Replace rollup to tsup for generate lib
+- Update types exports for typescript module and commonjs
+- Update to ESM script
+- Update CI workflow for fix pipeline to latest github changes
+- Drop support to node versions < 16
+
 ## 1.3.1
 
 ### Patch Changes - Change export for build process using bundlers

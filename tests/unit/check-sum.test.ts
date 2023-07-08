@@ -1,4 +1,4 @@
-import { CheckSum } from '~/check-sum';
+import { CheckSum } from 'src/check-sum';
 
 describe('CheckSum', () => {
     let checksum: CheckSum;
@@ -7,21 +7,21 @@ describe('CheckSum', () => {
         checksum = new CheckSum();
     });
 
-    test('check sum with rfc persona fisica', () => {
+    test('check_sum_with_rfc_persona_fisica', () => {
         const expected = 'A';
         const rfc = 'COSC8001137NA';
 
         expect(checksum.calculate(rfc)).toBe(expected);
     });
 
-    test('check sum with multibyte', () => {
+    test('check_sum_with_multibyte', () => {
         const expected = '0';
         const rfc = 'AÑÑ801231JK0';
 
         expect(checksum.calculate(rfc)).toBe(expected);
     });
 
-    test('check sum with rfc moral', () => {
+    test('check_sum_with_rfc_moral', () => {
         expect(checksum.calculate('IDE2001209V6')).toBe('6');
     });
 });
