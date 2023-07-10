@@ -59,10 +59,12 @@ export class RfcParser {
         const regex =
             /^(?<name>[A-ZÑ&]{3,4})(?<year>\d{2})(?<month>\d{2})(?<day>\d{2})(?<hkey>[A-Z0-9]{2})(?<checksum>[A0-9])$/u;
         const matches = regex.exec(rfc.toUpperCase());
-        if (!matches?.groups)
+        if (!matches?.groups) {
             throw new Error(
                 'The RFC expression does not contain the valid parts'
             );
+        }
+
         const date = DateTime.fromISO(
             `20${matches.groups.year}-${matches.groups.month}-${matches.groups.day}`
         );

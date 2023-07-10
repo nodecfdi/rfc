@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { Rfc } from 'src/rfc';
 import { DateTime } from 'luxon';
+import { Rfc } from 'src/rfc';
 
 describe('RFC', () => {
     test('create_rfc_persona_fisica', () => {

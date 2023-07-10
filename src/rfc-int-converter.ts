@@ -22,11 +22,14 @@ export class RfcIntConverter {
     public static FISICA_UPPER_BOUND = RfcIntConverter.MAX_INTEGER_VALUE; // EXP[last]
     public static MORAL_LOWER_BOUND = RfcIntConverter.MIN_INTEGER_VALUE;
     public static MORAL_UPPER_BOUND = RfcIntConverter.FISICA_LOWER_BOUND - 1; // EXP[last] - 1
+
     private readonly BASES = [11, 36, 36, 36_525, 28, 28, 28, 29];
+
     private readonly EXP = [
         1, 11, 396, 14_256, 520_700_400, 14_579_611_200, 408_229_113_600,
         11_430_415_180_800,
     ];
+
     private readonly CSUM_INT_CHAR = [
         '0',
         '1',
@@ -40,6 +43,7 @@ export class RfcIntConverter {
         '9',
         'A',
     ];
+
     private readonly CSUM_CHAR_INT: Record<string, number> = {
         0: 0,
         1: 1,
@@ -53,6 +57,7 @@ export class RfcIntConverter {
         9: 9,
         A: 10,
     };
+
     private readonly HKEY_INT_CHAR = [
         '0',
         '1',
@@ -91,6 +96,7 @@ export class RfcIntConverter {
         'Y',
         'Z',
     ];
+
     private readonly HKEY_CHAR_INT: Record<string, number> = {
         '0': 0,
         '1': 1,
@@ -129,6 +135,7 @@ export class RfcIntConverter {
         'Y': 34,
         'Z': 35,
     };
+
     private readonly NAME_REQ_INT_CHAR = [
         'A',
         'B',
@@ -159,6 +166,7 @@ export class RfcIntConverter {
         '&',
         '#',
     ];
+
     private readonly NAME_REQ_CHAR_INT: Record<string, number> = {
         'A': 0,
         'B': 1,
@@ -189,6 +197,7 @@ export class RfcIntConverter {
         '&': 26,
         '#': 27,
     };
+
     private readonly NAME_OPT_INT_CHAR = [
         '_',
         'A',
@@ -220,6 +229,7 @@ export class RfcIntConverter {
         '&',
         '#',
     ];
+
     private readonly NAME_OPT_CHAR_INT: Record<string, number> = {
         '_': 0,
         'A': 1,

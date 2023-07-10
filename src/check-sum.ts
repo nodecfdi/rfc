@@ -40,6 +40,7 @@ export class CheckSum {
         ' ': 37,
         '#': 38,
     };
+
     private readonly DIGIT_OVERRIDE: Record<number, string> = {
         10: 'A',
         11: '0',
@@ -47,7 +48,7 @@ export class CheckSum {
 
     public calculate(rfc: string): string {
         const chars = [...rfc.replaceAll('Ñ', '#')];
-        const length = chars.length;
+        const { length } = chars;
         chars.pop(); // remover el dígito predefinido
 
         // Valor inicial de la suma: 481 para morales, 0 para físicas

@@ -1,5 +1,5 @@
-import { RfcParser } from 'src/rfc-parser';
 import { DateTime } from 'luxon';
+import { RfcParser } from 'src/rfc-parser';
 
 describe('RfcParser', () => {
     test('parse_persona_fisica', () => {
