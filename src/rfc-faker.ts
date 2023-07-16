@@ -13,7 +13,7 @@ export class RfcFaker {
         // From moral to fisica, moral is lower than fisica
         return this.privateMakeRfc(
             RfcIntConverter.MORAL_LOWER_BOUND,
-            RfcIntConverter.FISICA_UPPER_BOUND
+            RfcIntConverter.FISICA_UPPER_BOUND,
         );
     }
 
@@ -25,7 +25,7 @@ export class RfcFaker {
     public mexicanRfcMoral(): string {
         return this.privateMakeRfc(
             RfcIntConverter.MORAL_LOWER_BOUND,
-            RfcIntConverter.MORAL_UPPER_BOUND
+            RfcIntConverter.MORAL_UPPER_BOUND,
         );
     }
 
@@ -37,7 +37,7 @@ export class RfcFaker {
     public mexicanRfcFisica(): string {
         return this.privateMakeRfc(
             RfcIntConverter.FISICA_LOWER_BOUND,
-            RfcIntConverter.FISICA_UPPER_BOUND
+            RfcIntConverter.FISICA_UPPER_BOUND,
         );
     }
 

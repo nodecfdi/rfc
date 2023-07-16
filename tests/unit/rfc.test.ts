@@ -120,7 +120,7 @@ describe('RFC', () => {
         const t = (): void => {
             Rfc.checkIsValid(
                 Rfc.RFC_GENERIC,
-                Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN
+                Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN,
             );
         };
 
@@ -131,7 +131,7 @@ describe('RFC', () => {
         const t = (): void => {
             Rfc.checkIsValid(
                 Rfc.RFC_FOREIGN,
-                Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN
+                Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN,
             );
         };
 

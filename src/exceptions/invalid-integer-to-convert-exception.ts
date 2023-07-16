@@ -7,20 +7,20 @@ export class InvalidIntegerToConvertException extends Error {
     }
 
     public static lowerThanZero(
-        value: number
+        value: number,
     ): InvalidIntegerToConvertException {
         return new InvalidIntegerToConvertException(
             'The integer serial number is lower than zero',
-            value
+            value,
         );
     }
 
     public static greaterThanMaximum(
-        value: number
+        value: number,
     ): InvalidIntegerToConvertException {
         return new InvalidIntegerToConvertException(
             'The integer serial number is greater than maximum value',
-            value
+            value,
         );
     }
 

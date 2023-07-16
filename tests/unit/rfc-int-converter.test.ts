@@ -14,7 +14,7 @@ describe('RfcIntConverter', () => {
 
     test('converter_max_integer_to_string', () => {
         const converted = converter.intToString(
-            RfcIntConverter.MAX_INTEGER_VALUE
+            RfcIntConverter.MAX_INTEGER_VALUE,
         );
         expect(converted).toBe('ÑÑÑÑ991231ZZA');
     });
@@ -44,19 +44,19 @@ describe('RfcIntConverter', () => {
 
     test('throw_exception_using_integer_greater_than_maximum', () => {
         expect(() =>
-            converter.intToString(RfcIntConverter.MAX_INTEGER_VALUE + 1)
+            converter.intToString(RfcIntConverter.MAX_INTEGER_VALUE + 1),
         ).toThrow(Error);
         expect(() =>
-            converter.intToString(RfcIntConverter.MAX_INTEGER_VALUE + 1)
+            converter.intToString(RfcIntConverter.MAX_INTEGER_VALUE + 1),
         ).toThrow('greater than maximum');
     });
 
     test('rfc_persona_moral_persona_fisica_bounds', () => {
         expect(RfcIntConverter.FISICA_LOWER_BOUND).toBe(
-            RfcIntConverter.MORAL_UPPER_BOUND + 1
+            RfcIntConverter.MORAL_UPPER_BOUND + 1,
         );
         expect(RfcIntConverter.MAX_INTEGER_VALUE).toBe(
-            RfcIntConverter.FISICA_UPPER_BOUND
+            RfcIntConverter.FISICA_UPPER_BOUND,
         );
     });
 });

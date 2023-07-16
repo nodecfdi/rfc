@@ -57,6 +57,6 @@ describe('RfcParser', () => {
         'parse_using_invalid_dates %s',
         (value) => {
             expect(() => RfcParser.parse(value)).toThrow('date');
-        }
+        },
     );
 });

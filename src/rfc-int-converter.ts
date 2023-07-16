@@ -17,10 +17,15 @@ import { InvalidIntegerToConvertException } from './exceptions/invalid-integer-t
  */
 export class RfcIntConverter {
     public static MIN_INTEGER_VALUE = 0;
+
     public static MAX_INTEGER_VALUE = 331_482_040_243_200 - 1; // EXP[last] * BASE[last]
+
     public static FISICA_LOWER_BOUND = 11_430_415_180_800; // EXP[last]
+
     public static FISICA_UPPER_BOUND = RfcIntConverter.MAX_INTEGER_VALUE; // EXP[last]
+
     public static MORAL_LOWER_BOUND = RfcIntConverter.MIN_INTEGER_VALUE;
+
     public static MORAL_UPPER_BOUND = RfcIntConverter.FISICA_LOWER_BOUND - 1; // EXP[last] - 1
 
     private readonly BASES = [11, 36, 36, 36_525, 28, 28, 28, 29];
@@ -328,9 +333,9 @@ export class RfcIntConverter {
             Math.abs(
                 DateTime.fromObject({ year: 2000, month: 1, day: 1 }).diff(
                     valueDate,
-                    'days'
-                ).days
-            )
+                    'days',
+                ).days,
+            ),
         );
     }
 

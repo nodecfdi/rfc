@@ -4,16 +4,22 @@ import { InvalidExpressionToParseException } from './exceptions/invalid-expressi
 export class RfcParser {
     /** "siglas" part ____000101AAA */
     private readonly _name: string;
+
     /** "año" part AAAA__0101AAA */
     private readonly _year: number;
+
     /** "mes" part AAAA00__01AAA */
     private readonly _month: number;
+
     /** "día" part AAAA0001__AAA */
     private readonly _day: number;
+
     /** "homoclave" part AAAA000101__A */
     private readonly _hKey: string;
+
     /** "dígito verificador" part AAAA000101AA_ */
     private readonly _checksum: string;
+
     /** Converter datetime of current rfc */
     private readonly _date: DateTime;
 
@@ -24,7 +30,7 @@ export class RfcParser {
         day: number,
         hKey: string,
         checksum: string,
-        date: DateTime
+        date: DateTime,
     ) {
         this._name = name;
         this._year = year;
@@ -61,12 +67,12 @@ export class RfcParser {
         const matches = regex.exec(rfc.toUpperCase());
         if (!matches?.groups) {
             throw new Error(
-                'The RFC expression does not contain the valid parts'
+                'The RFC expression does not contain the valid parts',
             );
         }
 
         const date = DateTime.fromISO(
-            `20${matches.groups.year}-${matches.groups.month}-${matches.groups.day}`
+            `20${matches.groups.year}-${matches.groups.month}-${matches.groups.day}`,
         );
         if (
             `${matches.groups.year}${matches.groups.month}${matches.groups.day}` !==
@@ -82,7 +88,7 @@ export class RfcParser {
             Number(matches.groups.day),
             matches.groups.hkey,
             matches.groups.checksum,
-            date
+            date,
         );
     }
 

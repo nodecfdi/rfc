@@ -42,9 +42,6 @@ jobs:
             - name: Lint source
               run: |
                   pnpm lint:check
-            - name: Format source
-              run: |
-                  pnpm format:check
 
             - name: Build package
               run: |

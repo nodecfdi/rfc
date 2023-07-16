@@ -9,14 +9,14 @@ export class InvalidExpressionToParseException extends Error {
     public static invalidParts(rfc: string): InvalidExpressionToParseException {
         return new InvalidExpressionToParseException(
             'The RFC expression does not contain the valid parts',
-            rfc
+            rfc,
         );
     }
 
     public static invalidDate(rfc: string): InvalidExpressionToParseException {
         return new InvalidExpressionToParseException(
             'The RFC expression does not contain a valid date',
-            rfc
+            rfc,
         );
     }
 
