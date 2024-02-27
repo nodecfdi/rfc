@@ -1,5 +1,17 @@
 # @nodecfdi/rfc ChangeLog
 
+## 2.0.0
+
+### Major Changes - Change build tool, linter tools
+
+- Update dependencies
+- Update docs with new theme
+- Replace tsup and usage vite in library mode
+- Update types exports for typescript
+- Update CI with latest github actions
+- Force to more strict rules on eslint and prettier
+- Change luxon dependency to luxon has peer dependency and optionally @types/luxon peer dependency
+
 ## 1.3.2 - Maintenance and Small Optimizations
 
 - Update class `Checksums` with small optimization

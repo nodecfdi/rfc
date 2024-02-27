@@ -1,98 +1,87 @@
 {
-    "name": "@nodecfdi/rfc",
-    "version": "1.3.2",
-    "description": "Librería para trabajar con RFC (Mexicano)",
-    "keywords": [
-        "rfc",
-        "mexican",
-        "homoclave"
-    ],
-    "private": false,
-    "author": "OcelotlStudio <contacto@ocelotlstudio.com>",
-    "license": "MIT",
-    "type": "module",
-    "main": "./dist/rfc.cjs",
-    "module": "./dist/rfc.js",
-    "unpkg": "./dist/rfc.global.js",
-    "browser": "./dist/rfc.global.js",
-    "types": "./dist/index.d.ts",
-    "exports": {
-        ".": {
-            "import": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/rfc.js"
-            },
-            "require": {
-                "types": "./dist/index.d.cts",
-                "default": "./dist/rfc.cjs"
-            }
-        }
-    },
-    "files": [
-        "dist"
-    ],
-    "scripts": {
-        "prepare": "is-ci || husky install",
-        "format": "prettier --write --ignore-unknown '**/*'",
-        "format:check": "prettier --check --ignore-unknown '**/*'",
-        "lint": "eslint . --fix --ext .ts,.js",
-        "lint:check": "eslint . --ext .ts,.js",
-        "test": "vitest",
-        "test:run": "vitest run",
-        "test:coverage": "vitest run --coverage",
-        "build": "rimraf dist && tsup",
-        "gen:docs": "rimraf docs && typedoc --options typedoc.json",
-        "release": "pnpm run build && pnpm changeset publish"
-    },
-    "repository": "https://github.com/nodecfdi/rfc",
-    "bugs": {
-        "url": "https://github.com/nodecfdi/rfc/issues"
-    },
-    "homepage": "https://github.com/nodecfdi/rfc",
-    "devDependencies": {
-        "@changesets/cli": "^2.26.2",
-        "@commitlint/cli": "^17.6.6",
-        "@nodecfdi/eslint-config-nodecfdi": "^0.1.0",
-        "@nrsk/config-conventional": "^1.0.0",
-        "@types/is-ci": "^3.0.0",
-        "@types/luxon": "^3.3.0",
-        "@types/node": "^20.4.1",
-        "@vitest/coverage-istanbul": "^0.34.0",
-        "eslint": "^8.44.0",
-        "husky": "^8.0.3",
-        "is-ci": "^3.0.1",
-        "jsdom": "^22.1.0",
-        "lint-staged": "^13.2.3",
-        "prettier": "^3.0.0",
-        "rimraf": "^5.0.1",
-        "tsup": "^7.1.0",
-        "typedoc": "^0.25.0",
-        "typedoc-theme-hierarchy": "^4.0.0",
-        "typescript": "^5.1.6",
-        "vite": "^4.4.2",
-        "vitest": "^0.34.0"
-    },
-    "dependencies": {
-        "luxon": "^3.3.0"
-    },
-    "commitlint": {
-        "extends": [
-            "@nrsk/config-conventional"
-        ]
-    },
-    "lint-staged": {
-        "*.{js,ts,json}": [
-            "prettier --write"
-        ],
-        "*.{js,ts}": [
-            "eslint --fix"
-        ]
-    },
-    "engines": {
-        "node": ">=16.0.0"
-    },
-    "browserslist": [
-        "defaults",
-        "not IE 11"
-    ]
+  "name": "@nodecfdi/rfc",
+  "version": "2.0.0",
+  "description": "Librería para trabajar con RFC (Mexicano)",
+  "keywords": [
+    "rfc",
+    "mexican",
+    "homoclave"
+  ],
+  "private": false,
+  "author": "OcelotlStudio <contacto@ocelotlstudio.com>",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/rfc.umd.cjs",
+  "module": "./dist/rfc.js",
+  "unpkg": "./dist/rfc.umd.cjs",
+  "browser": "./dist/rfc.umd.cjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/rfc.js",
+      "require": "./dist/rfc.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepare": "is-in-ci || husky",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "build": "rimraf dist && tsc && vite build",
+    "gen:docs": "rimraf docs && typedoc --options typedoc.json",
+    "release": "pnpm run build && pnpm changeset publish"
+  },
+  "repository": "https://github.com/nodecfdi/rfc",
+  "bugs": {
+    "url": "https://github.com/nodecfdi/rfc/issues"
+  },
+  "homepage": "https://github.com/nodecfdi/rfc",
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^18.6.1",
+    "@commitlint/config-conventional": "^18.6.2",
+    "@eslint/eslintrc": "^3.0.2",
+    "@types/luxon": "^3.4.2",
+    "@types/node": "^20.11.20",
+    "@vitest/coverage-istanbul": "^1.3.1",
+    "eslint": "^8.57.0",
+    "eslint-config-canonical": "^42.8.1",
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.11",
+    "is-in-ci": "^0.1.0",
+    "jsdom": "^24.0.0",
+    "luxon": "^3.4.4",
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "typedoc": "^0.25.9",
+    "typedoc-material-theme": "^1.0.2",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3",
+    "vitest": "^1.3.1"
+  },
+  "peerDependencies": {
+    "@types/luxon": "3.4.2",
+    "luxon": "^3.4.4"
+  },
+  "peerDependenciesMeta": {
+    "@types/luxon": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ]
 }
