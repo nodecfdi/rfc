@@ -1,5 +1,13 @@
 # @nodecfdi/rfc ChangeLog
 
+## 2.0.1
+
+### Patch Changes - Fix types
+
+- Fix types in exports require, import
+- Update dependencies
+- Update commitlint cli and config
+
 ## 2.0.0
 
 ### Major Changes - Change build tool, linter tools
