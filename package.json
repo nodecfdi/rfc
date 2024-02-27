@@ -18,8 +18,14 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/rfc.js",
-      "require": "./dist/rfc.umd.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/rfc.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/rfc.umd.cjs"
+      }
     }
   },
   "files": [
@@ -45,8 +51,8 @@
   "homepage": "https://github.com/nodecfdi/rfc",
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
-    "@commitlint/cli": "^18.6.1",
-    "@commitlint/config-conventional": "^18.6.2",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "@eslint/eslintrc": "^3.0.2",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.11.20",
