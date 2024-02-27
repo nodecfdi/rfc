@@ -1,6 +1,6 @@
 {
   "name": "@nodecfdi/rfc",
-  "version": "1.3.2",
+  "version": "2.0.0",
   "description": "Librería para trabajar con RFC (Mexicano)",
   "keywords": [
     "rfc",
