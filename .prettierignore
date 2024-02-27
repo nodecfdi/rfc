@@ -7,4 +7,4 @@ coverage/
 dist/
 .pnpm-store
 pnpm-lock.yaml
-**/*.md
+*.md
