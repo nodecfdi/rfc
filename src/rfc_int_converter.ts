@@ -1,4 +1,4 @@
-import { InvalidIntegerToConvertException } from './exceptions/invalid-integer-to-convert-exception';
+import { InvalidIntegerToConvertException } from './exceptions/invalid_integer_to_convert_exception';
 import { DateTime } from 'luxon';
 
 /**

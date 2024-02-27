@@ -1,4 +1,4 @@
-import { RfcIntConverter } from './rfc-int-converter';
+import { RfcIntConverter } from './rfc_int_converter';
 
 /**
  * This class creates a random but syntactically valid Rfc string.

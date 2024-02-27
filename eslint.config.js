@@ -42,10 +42,39 @@ export default defineFlatConfig([
       },
     },
   },
+  // Rules needed by nodecfdi
   {
     rules: {
-      'no-bitwise': ['error', { allow: ['&', '|'] }],
+      '@typescript-eslint/naming-convention': [
+        'error',
+        {
+          selector: 'variable',
+          format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+        },
+        {
+          selector: 'typeLike',
+          format: ['PascalCase'],
+        },
+        {
+          selector: 'class',
+          format: ['PascalCase'],
+        },
+        {
+          selector: 'interface',
+          format: ['PascalCase'],
+          custom: {
+            regex: '^I[A-Z]',
+            match: false,
+          },
+        },
+      ],
 
+      'unicorn/filename-case': [
+        'error',
+        {
+          case: 'snakeCase',
+        },
+      ],
       'unicorn/consistent-function-scoping': ['error', { checkArrowFunctions: false }],
 
       'prettier/prettier': [
@@ -69,6 +98,12 @@ export default defineFlatConfig([
           usePrettierrc: true,
         },
       ],
+    },
+  },
+  // Rules allowed only in this project
+  {
+    rules: {
+      'no-bitwise': ['error', { allow: ['&', '|'] }],
     },
   },
 ]);

@@ -1,4 +1,4 @@
-import { InvalidExpressionToParseException } from './exceptions/invalid-expression-to-parse-exception';
+import { InvalidExpressionToParseException } from './exceptions/invalid_expression_to_parse_exception';
 import { DateTime } from 'luxon';
 
 export class RfcParser {

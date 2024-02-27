@@ -1,6 +1,6 @@
-import { CheckSum } from './check-sum';
-import { RfcIntConverter } from './rfc-int-converter';
-import { RfcParser } from './rfc-parser';
+import { CheckSum } from './check_sum';
+import { RfcIntConverter } from './rfc_int_converter';
+import { RfcParser } from './rfc_parser';
 
 /**
  * Value object representation of an RFC.
