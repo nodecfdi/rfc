@@ -1,5 +1,5 @@
-import { InvalidExpressionToParseException } from './exceptions/invalid_expression_to_parse_exception';
 import { DateTime } from 'luxon';
+import { InvalidExpressionToParseException } from './exceptions/invalid_expression_to_parse_exception.js';
 
 export class RfcParser {
   private constructor(
@@ -43,6 +43,7 @@ export class RfcParser {
     const regex =
       /^(?<name>[A-ZÑ&]{3,4})(?<year>\d{2})(?<month>\d{2})(?<day>\d{2})(?<hkey>[A-Z\d]{2})(?<checksum>[A\d])$/u;
     const matches = regex.exec(rfc.toUpperCase());
+
     if (!matches?.groups) {
       throw new Error('The RFC expression does not contain the valid parts');
     }
@@ -50,6 +51,7 @@ export class RfcParser {
     const date = DateTime.fromISO(
       `20${matches.groups.year}-${matches.groups.month}-${matches.groups.day}`,
     );
+
     if (
       `${matches.groups.year}${matches.groups.month}${matches.groups.day}` !==
       date.toFormat('yyLLdd')

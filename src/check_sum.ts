@@ -49,16 +49,19 @@ export class CheckSum {
   public calculate(rfc: string): string {
     const chars = [...rfc.replaceAll('Ñ', '#')];
     const { length } = chars;
+
     chars.pop(); // remover el dígito predefinido
 
     // Valor inicial de la suma: 481 para morales, 0 para físicas
     let sum = length === 12 ? 481 : 0;
+
     for (const [index, char] of chars.entries()) {
       sum += (this.DICTIONARY[char] || 0) * (length - index);
     }
 
     // posibles valores: [1, 2, ..., 10, 11] porque sum % 11 = int<0, 10>
     const digit = 11 - (sum % 11);
+
     // se retorna 10 => 0, 11 => A o el valor obtenido
     return this.DIGIT_OVERRIDE[digit] || digit.toString();
   }

@@ -1,6 +1,6 @@
-import { RfcIntConverter } from '../../src/rfc_int_converter';
+import { RfcIntConverter } from '../../src/rfc_int_converter.js';
 
-describe('RfcIntConverter', () => {
+describe('rfcIntConverter', () => {
   let converter: RfcIntConverter;
 
   beforeAll(() => {
@@ -9,21 +9,25 @@ describe('RfcIntConverter', () => {
 
   test('converter_zero_to_string', () => {
     const converted = converter.intToString(0);
+
     expect(converted).toBe('AAA000101000');
   });
 
   test('converter_max_integer_to_string', () => {
     const converted = converter.intToString(RfcIntConverter.MAX_INTEGER_VALUE);
+
     expect(converted).toBe('ÑÑÑÑ991231ZZA');
   });
 
   test('converter_string_to_zero', () => {
     const converted = converter.stringToInt('AAA000101000');
+
     expect(converted).toBe(0);
   });
 
   test('converter_string_to_max_integer', () => {
     const converted = converter.stringToInt('ÑÑÑÑ991231ZZA');
+
     expect(converted).toBe(RfcIntConverter.MAX_INTEGER_VALUE);
   });
 

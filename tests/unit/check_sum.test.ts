@@ -1,6 +1,6 @@
-import { CheckSum } from '../../src/check_sum';
+import { CheckSum } from '../../src/check_sum.js';
 
-describe('CheckSum', () => {
+describe('checkSum', () => {
   let checksum: CheckSum;
 
   beforeAll(() => {

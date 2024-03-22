@@ -1,23 +1,7 @@
 {
+  "extends": "@nodecfdi/tsconfig/tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["ESNext"],
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "baseUrl": "."
   },
-  "include": ["src"]
+  "exclude": ["tests"]
 }
