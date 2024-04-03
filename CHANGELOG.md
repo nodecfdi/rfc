@@ -1,5 +1,17 @@
 # @nodecfdi/rfc ChangeLog
 
+## 2.0.2
+
+### Patch Changes - Update linting and build tools
+
+- Remove from ci workflow node version 17
+- Fix renovate config for github
+- Revert build tool to use tsup
+- Update README with latest changes
+- Update commitlint cli and config
+- Update eslint, prettier, tsconfig to use standard nodecfdi config
+- Update dependencies
+
 ## 2.0.1
 
 ### Patch Changes - Fix types

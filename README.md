@@ -49,10 +49,10 @@ pnpm add @nodecfdi/rfc
 
 CDN - Browser
 
-Usa la versión mas reciente publicada cambiando `<latest-version>` por la última version. Ex. ...rfc@2.0.1/dist...
+Usa la versión mas reciente publicada cambiando `<latest-version>` por la última version. Ex. ...rfc@2.0.2/dist...
 
 ```html
-<script src="https://unpkg.com/@nodecfdi/rfc@<latest-version>/dist/rfc.umd.cjs"></script>
+<script src="https://unpkg.com/@nodecfdi/rfc@<latest-version>/dist/index.global.js"></script>
 ```
 
 ## Uso básico
