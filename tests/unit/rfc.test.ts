@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
-import { Rfc } from '../../src/rfc.js';
+import { Rfc } from '#src/rfc';
 
-describe('rFC', () => {
+describe('rfc', () => {
   test('create_rfc_persona_fisica', () => {
     const input = 'COSC8001137NA';
     const rfc = Rfc.unparsed(input);

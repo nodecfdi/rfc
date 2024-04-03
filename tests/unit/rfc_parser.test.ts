@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
-import { RfcParser } from '../../src/rfc_parser.js';
+import { RfcParser } from '#src/rfc_parser';
 
-describe('rfcParser', () => {
+describe('rfc_parser', () => {
   test('parse_persona_fisica', () => {
     const parser = RfcParser.parse('COSC8001137NA');
 

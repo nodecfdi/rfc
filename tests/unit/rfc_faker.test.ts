@@ -1,7 +1,7 @@
-import { Rfc } from '../../src/rfc.js';
-import { RfcFaker } from '../../src/rfc_faker.js';
+import { Rfc } from '#src/rfc';
+import { RfcFaker } from '#src/rfc_faker';
 
-describe('rfcFaker', () => {
+describe('rfc_faker', () => {
   const iterations = 100;
   let faker: RfcFaker;
 

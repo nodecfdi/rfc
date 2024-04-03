@@ -1,6 +1,6 @@
-import { InvalidExpressionToParseException } from '../../../src/exceptions/invalid_expression_to_parse_exception.js';
+import { InvalidExpressionToParseException } from '#src/exceptions/invalid_expression_to_parse_exception';
 
-describe('invalidExpressionToParseException', () => {
+describe('invalid_expression_to_parse_exception', () => {
   test('exception_invalid_parts', () => {
     const value = 'foo';
     const exception = InvalidExpressionToParseException.invalidParts(value);

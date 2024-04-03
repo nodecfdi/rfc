@@ -1,6 +1,6 @@
-import { InvalidIntegerToConvertException } from '../../../src/exceptions/invalid_integer_to_convert_exception.js';
+import { InvalidIntegerToConvertException } from '#src/exceptions/invalid_integer_to_convert_exception';
 
-describe('invalidIntegerToConvertException', () => {
+describe('invalid_integer_to_convert_exception', () => {
   test('exception_lower_than_zero', () => {
     const value = -1;
     const exception = InvalidIntegerToConvertException.lowerThanZero(value);
