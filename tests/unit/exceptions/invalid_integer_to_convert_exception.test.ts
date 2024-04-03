@@ -1,9 +1,10 @@
-import { InvalidIntegerToConvertException } from '../../../src/exceptions/invalid_integer_to_convert_exception';
+import { InvalidIntegerToConvertException } from '#src/exceptions/invalid_integer_to_convert_exception';
 
-describe('InvalidIntegerToConvertException', () => {
+describe('invalid_integer_to_convert_exception', () => {
   test('exception_lower_than_zero', () => {
     const value = -1;
     const exception = InvalidIntegerToConvertException.lowerThanZero(value);
+
     expect(exception).toBeInstanceOf(Error);
     expect(exception.getValue()).toBe(value);
     expect(exception.message).toContain('lower than zero');
@@ -12,6 +13,7 @@ describe('InvalidIntegerToConvertException', () => {
   test('exception_greater_than_maximum', () => {
     const value = -1;
     const exception = InvalidIntegerToConvertException.greaterThanMaximum(value);
+
     expect(exception).toBeInstanceOf(Error);
     expect(exception.getValue()).toBe(value);
     expect(exception.message).toContain('greater than maximum');

@@ -1,10 +1,11 @@
-import { Rfc } from '../../src/rfc';
 import { DateTime } from 'luxon';
+import { Rfc } from '#src/rfc';
 
-describe('RFC', () => {
+describe('rfc', () => {
   test('create_rfc_persona_fisica', () => {
     const input = 'COSC8001137NA';
     const rfc = Rfc.unparsed(input);
+
     expect(rfc.getRfc()).toBe(input);
     expect(`${rfc}`).toBe(input);
     expect(rfc.isGeneric()).toBeFalsy();
@@ -19,6 +20,7 @@ describe('RFC', () => {
   test('create_rfc_moral', () => {
     const input = 'DIM8701081LA';
     const rfc = Rfc.unparsed(input);
+
     expect(rfc.getRfc()).toBe(input);
     expect(`${rfc}`).toBe(input);
     expect(rfc.isGeneric()).toBeFalsy();
@@ -32,6 +34,7 @@ describe('RFC', () => {
 
   test('create_with_foreign', () => {
     const rfc = Rfc.unparsed(Rfc.RFC_FOREIGN);
+
     expect(rfc.isForeign()).toBeTruthy();
     expect(rfc.isFisica()).toBeTruthy();
     expect(rfc.isGeneric()).toBeFalsy();
@@ -40,6 +43,7 @@ describe('RFC', () => {
 
   test('create_with_generic', () => {
     const rfc = Rfc.unparsed(Rfc.RFC_GENERIC);
+
     expect(rfc.isGeneric()).toBeTruthy();
     expect(rfc.isFisica()).toBeTruthy();
     expect(rfc.isForeign()).toBeFalsy();
@@ -48,6 +52,7 @@ describe('RFC', () => {
 
   test('parse_with_correct_data', () => {
     const rfc = Rfc.parse('COSC8001137NA');
+
     expect(`${rfc}`).toBe('COSC8001137NA');
     expect(rfc.toString()).toBe('COSC8001137NA');
     expect(rfc.toLocaleString()).toBe('COSC8001137NA');
@@ -64,6 +69,7 @@ describe('RFC', () => {
 
   test('serial_number', () => {
     const rfc = Rfc.fromSerial(1_348_025_748_541);
+
     // Current serial is undefined.
     expect(rfc.calculateSerial()).toBe(1_348_025_748_541);
     expect(rfc.getRfc()).toBe('DIM8701081LA');
@@ -73,6 +79,7 @@ describe('RFC', () => {
 
   test('create_bad_digit', () => {
     const rfc = Rfc.parse('COSC8001137N9');
+
     expect(rfc.calculateChecksum()).toBe('A');
     expect(rfc.doesCheckSumMatch()).toBeFalsy();
   });
@@ -82,22 +89,26 @@ describe('RFC', () => {
     const expected = 'AÑÑ801231JK0';
 
     const rfc = Rfc.parse(rfcMultibyte);
+
     expect(rfc.getRfc()).toBe(expected);
   });
 
   test('json_serializable', () => {
     const data = { rfc: Rfc.unparsed('COSC8001137NA') };
+
     expect(JSON.stringify(data)).toBe('{"rfc":"COSC8001137NA"}');
     expect(data.rfc.toJSON()).toBe('COSC8001137NA');
   });
 
   test('create_generic', () => {
     const rfc = Rfc.newGeneric();
+
     expect(rfc.getRfc()).toBe(Rfc.RFC_GENERIC);
   });
 
   test('create_foreign', () => {
     const rfc = Rfc.newForeign();
+
     expect(rfc.getRfc()).toBe(Rfc.RFC_FOREIGN);
   });
 
@@ -141,6 +152,7 @@ describe('RFC', () => {
 
   test('obtain_date_leap_years', () => {
     const expected = DateTime.fromISO('2000-02-29').toMillis();
+
     expect(Rfc.obtainDate('XXX000229XX6')).toBe(expected);
 
     // Invalid leap year

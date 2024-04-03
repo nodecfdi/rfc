@@ -1,9 +1,10 @@
-import { RfcParser } from '../../src/rfc_parser';
 import { DateTime } from 'luxon';
+import { RfcParser } from '#src/rfc_parser';
 
-describe('RfcParser', () => {
+describe('rfc_parser', () => {
   test('parse_persona_fisica', () => {
     const parser = RfcParser.parse('COSC8001137NA');
+
     expect(parser.getName()).toBe('COSC');
     expect(parser.getYear()).toBe(80);
     expect(parser.getMonth()).toBe(1);
@@ -15,6 +16,7 @@ describe('RfcParser', () => {
 
   test('parse_persona_moral', () => {
     const parser = RfcParser.parse('AAA99123103A');
+
     expect(parser.getName()).toBe('AAA');
     expect(parser.getYear()).toBe(99);
     expect(parser.getMonth()).toBe(12);
@@ -26,6 +28,7 @@ describe('RfcParser', () => {
 
   test('parse_using_lower_case', () => {
     const parser = RfcParser.parse('cosc8001137na');
+
     expect(parser.getName()).toBe('COSC');
     expect(parser.getHKey()).toBe('7N');
     expect(parser.getChecksum()).toBe('A');
@@ -33,11 +36,13 @@ describe('RfcParser', () => {
 
   test('parse_using_multibyte', () => {
     const parser = RfcParser.parse('ÑÑÑÑ000101AAA');
+
     expect(parser.getName()).toBe('ÑÑÑÑ');
   });
 
   test('parse_using_leap_year', () => {
     const parser = RfcParser.parse('AAAA000229AAA');
+
     expect(parser.getYear()).toBe(0);
     expect(parser.getMonth()).toBe(2);
     expect(parser.getDay()).toBe(29);

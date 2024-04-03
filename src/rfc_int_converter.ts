@@ -1,5 +1,5 @@
-import { InvalidIntegerToConvertException } from './exceptions/invalid_integer_to_convert_exception';
 import { DateTime } from 'luxon';
+import { InvalidIntegerToConvertException } from './exceptions/invalid_integer_to_convert_exception.js';
 
 /**
  * RfcIntConverter is a helper class to convert from an integer to RFC and backwards.
@@ -294,8 +294,10 @@ export class RfcIntConverter {
 
     const integers: number[] = [];
     let temporaryValue = value;
+
     for (const base of this.BASES) {
       const integer = temporaryValue % base;
+
       temporaryValue = (temporaryValue - integer) / base;
       integers.push(integer);
     }
