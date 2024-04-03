@@ -1,7 +1,11 @@
 {
-  "extends": "@nodecfdi/tsconfig/tsconfig.base.json",
+  "extends": "@nodecfdi/tsconfig/tsconfig.package.json",
   "compilerOptions": {
-    "baseUrl": "."
-  },
-  "exclude": ["tests"]
+    "types": ["vitest/globals"],
+    "baseUrl": ".",
+    "paths": {
+      "#src/*": ["./src/*.js"],
+      "#tests/*": ["./tests/*.js"]
+    }
+  }
 }
