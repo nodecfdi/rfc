@@ -33,10 +33,10 @@ devDependencies:
     specifier: 1.4.0
     version: 1.4.0(vitest@1.4.0)
   eslint:
-    specifier: ^8.57.0
+    specifier: 8.57.0
     version: 8.57.0
   eslint-define-config:
-    specifier: ^2.1.0
+    specifier: 2.1.0
     version: 2.1.0
   husky:
     specifier: 9.0.11
