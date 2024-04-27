@@ -1,97 +1,20 @@
-# @nodecfdi/rfc ChangeLog
+## [2.0.3](https://github.com/nodecfdi/rfc/compare/v2.0.2...v2.0.3) (2024-04-27)
 
-## 2.0.2
+### Performance Improvements
 
-### Patch Changes - Update linting and build tools
+- :construction: now errors are exports isolated in a module ([2c634fd](https://github.com/nodecfdi/rfc/commit/2c634fd500a7f18079cbf003613ae86dccb89616))
+- :zap: move exports to isolated index file in root ([883dbd2](https://github.com/nodecfdi/rfc/commit/883dbd244c22fb6b89eb6aee13692006f055c829))
 
-- Remove from ci workflow node version 17
-- Fix renovate config for github
-- Revert build tool to use tsup
-- Update README with latest changes
-- Update commitlint cli and config
-- Update eslint, prettier, tsconfig to use standard nodecfdi config
-- Update dependencies
+## [1.2.1](https://github.com/nodecfdi/rfc/compare/v1.2.0...v1.2.1) (2022-03-02)
 
-## 2.0.1
+### Bug Fixes
 
-### Patch Changes - Fix types
+- resolve bad validation with flags and update method isValid to work with flags ([e94cbe6](https://github.com/nodecfdi/rfc/commit/e94cbe6486e402a4265415d13aea4c97690553b8))
 
-- Fix types in exports require, import
-- Update dependencies
-- Update commitlint cli and config
+## [1.2.0](https://github.com/nodecfdi/rfc/compare/v1.1.0...v1.2.0) (2022-02-26)
 
-## 2.0.0
+### Features
 
-### Major Changes - Change build tool, linter tools
+- added isValid, checkIsValid and obtainDate methods to rfc. ([54d7274](https://github.com/nodecfdi/rfc/commit/54d727417f793f388656393eae370d6f23377b84))
 
-- Update dependencies
-- Update docs with new theme
-- Replace tsup and usage vite in library mode
-- Update types exports for typescript
-- Update CI with latest github actions
-- Force to more strict rules on eslint and prettier
-- Change luxon dependency to luxon has peer dependency and optionally @types/luxon peer dependency
-
-## 1.3.2 - Maintenance and Small Optimizations
-
-- Update class `Checksums` with small optimization
-- Update dependencis
-- Replace rollup to tsup for generate lib
-- Update types exports for typescript module and commonjs
-- Update to ESM script
-- Update CI workflow for fix pipeline to latest github changes
-- Drop support to node versions < 16
-
-## 1.3.1
-
-### Patch Changes - Change export for build process using bundlers
-
-- Resolve exports for usage with bundlers like a vite|rollup
-- Update dependencies
-
-## 1.3.0
-
-### Minor Changes - Drop support to node 12
-
-- Remove support to node version 12
-
-## 1.2.3
-
-### Change build tool from microbundle to rollup
-
-- Change build tool
-- Update dependencies
-- Added api-extractor for check types `.d.ts`
-- Replace microbundle to rollup
-- Replace jest for vitest (added support to multiple environment tests like a node or browser)
-
-## 1.2.2
-
-## CI
-
-- Update workflow for use pnpm and better test coverage
-- Added SonarCloud for better continuous code quality
-
-### Build
-
-- refactor change from rollup bundle to microbundle
-
-## 1.2.1
-
-- Fixed method isValid and checkIsValid, problem with bad flags
-- Update method isValid with use of parameter flag
-- Update dependencies
-
-## 1.2.0
-
-- Added methods isValid, checkIsValid and obtainDate
-- Update dependencies
-- Minor fixes
-- Updated eslint rules for better clear code
-
-## 1.1.0
-
-- Added ES6 and Rollup support
-- Browser support
-- Updated dependencies
-- Better test files
+## 1.1.0 (2021-12-25)

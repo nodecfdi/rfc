@@ -47,76 +47,9 @@ PNPM
 pnpm add @nodecfdi/rfc
 ```
 
-CDN - Browser
+## Documentación
 
-Usa la versión mas reciente publicada cambiando `<latest-version>` por la última version. Ex. ...rfc@2.0.2/dist...
-
-```html
-<script src="https://unpkg.com/@nodecfdi/rfc@<latest-version>/dist/index.global.js"></script>
-```
-
-## Uso básico
-
-```ts
-import { Rfc } from '@nodecfdi/rfc';
-// const form = { rfc:  'COSC8001137NA' }; // suponiendo que llega un formulario con rfc
-const rfc = Rfc.parse(form.rfc);
-console.log(rfc.getRfc()); // COSC8001137NA
-console.log(`${rfc}`); // COSC8001137NA
-console.log(JSON.stringify({ data: `${rfc}` })); // {"data": "COSC8001137NA"}
-console.log(rfc.isFisica()); // true
-console.log(rfc.isMoral()); // false
-console.log(rfc.isGeneric()); // false
-console.log(rfc.isForeign()); // false
-```
-
-## Creación de objetos
-
-El objeto `Rfc` se puede crear a partir de cuatro formas:
-
-- `Rfc.parse(string): Rfc`: Se validan los datos de entrada y surge una excepción si son inválidos.
-- `Rfc.parseOrNull(string): <Rfc||null>`: Se validan los datos de entrada y retorna nulo si son inválidos.
-- `Rfc.unparsed(string): Rfc`: No se validan los datos de entrada, se creará el objeto con la cadena de caracteres como Rfc.
-- `Rfc.fromSerial(int): Rfc`: Se convierte el número de serie del RFC a su representación de cadena de caracteres.
-
-No se puede crear un objeto a partir del constructor `new Rfc`. Use `Rfc.unparsed` en su lugar.
-
-Se recomienda que, siempre que se crea el objeto y los datos de origen no son de confianza, se utilice `Rfc.parse`.
-
-El único dato importante dentro del RFC es la cadena de caracteres misma. Por ello se ha implementado que la conversión
-a cadena de caracteres y la exportación a JSON devuelvan específicamente este dato.
-
-## Números de serie
-
-La representación del _número de serie_ corresponde a un número creado con esta misma librería,
-este número es un entero de 64 bits que se puede almacenar como un entero largo en una base de datos.
-
-Para obtener el número de serie de un RFC puede usar el método `Rfc.calculateSerial()`.
-
-Para crear un Rfc a partir de un entero puede usar `Rfc.fromSerial()`.
-
-La clase responsable de los cálculos involucrados en esta conversión está optimizada con arreglos constantes
-de conversión por lo que su ejecución es lo más veloz que puede ser.
-
-## RFC genérico y foráneo
-
-Es frecuente utilizar RFC que son _virtuales_, por ejemplo, para operaciones sin identificar como una
-venta de mostrador u operaciones con extranjeros, en estos casos están las constantes
-`Rfc.RFC_GENERIC = 'XAXX010101000'` y `Rfc.RFC_FOREIGN = 'XEXX010101000'` respectivamente.
-
-Puede usar los métodos `Rfc.newGeneric()` y `Rfc.newForeign()` para crear instancias con estos datos.
-
-Si se desea saber que el RFC es genérico se puede usar el método `Rfc.isGeneric()` y para RFC extranjero `Rfc.isForeign()`.
-
-## Generador de RFC
-
-Es común usar generadores (ficticios) de datos, esta librería provee la clase `RfcFaker` que se puede utilizar por sí sola.
-
-Provee métodos para crear una cadena de caracteres que es una clave RFC:
-
-- `RfcFaker.mexicanRfcFisica()` para persona física (13 posiciones).
-- `RfcFaker.mexicanRfcMoral()` para persona moral (12 posiciones).
-- `RfcFaker.mexicanRfc()` indistintamente una persona moral o física.
+La documentación está disponible en el sitio web [NodeCfdi](https://nodecfdi.com)
 
 ## Soporte
 
@@ -139,21 +72,19 @@ Las contribuciones con bienvenidas. Por favor lee [CONTRIBUTING][] para más det
 
 The `@nodecfdi/rfc` library is copyright © [NodeCfdi](https://github.com/nodecfdi) - [OcelotlStudio](https://ocelotlstudio.com) and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
-[contributing]: https://github.com/nodecfdi/rfc/blob/main/CONTRIBUTING.md
+[contributing]: https://github.com/nodecfdi/.github/blob/main/docs/CONTRIBUTING.md
 [changelog]: https://github.com/nodecfdi/rfc/blob/main/CHANGELOG.md
-
 [source]: https://github.com/nodecfdi/rfc
 [node-version]: https://www.npmjs.com/package/@nodecfdi/rfc
 [discord]: https://discord.gg/AsqX8fkW2k
 [release]: https://www.npmjs.com/package/@nodecfdi/rfc
-[license]: https://github.com/nodecfdi/rfc/blob/main/LICENSE
+[license]: https://github.com/nodecfdi/rfc/blob/main/LICENSE.md
 [build]: https://github.com/nodecfdi/rfc/actions/workflows/build.yml?query=branch:main
-[reliability]:https://sonarcloud.io/component_measures?id=nodecfdi_rfc&metric=Reliability
+[reliability]: https://sonarcloud.io/component_measures?id=nodecfdi_rfc&metric=Reliability
 [maintainability]: https://sonarcloud.io/component_measures?id=nodecfdi_rfc&metric=Maintainability
 [coverage]: https://sonarcloud.io/component_measures?id=nodecfdi_rfc&metric=Coverage
 [violations]: https://sonarcloud.io/project/issues?id=nodecfdi_rfc&resolved=false
 [downloads]: https://www.npmjs.com/package/@nodecfdi/rfc
-
 [badge-source]: https://img.shields.io/badge/source-nodecfdi/rfc-blue.svg?logo=github
 [badge-node-version]: https://img.shields.io/node/v/@nodecfdi/rfc.svg?logo=nodedotjs
 [badge-discord]: https://img.shields.io/discord/459860554090283019?logo=discord

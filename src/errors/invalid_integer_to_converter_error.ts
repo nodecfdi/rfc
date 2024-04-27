@@ -1,4 +1,4 @@
-export class InvalidIntegerToConvertException extends Error {
+export class InvalidIntegerToConverterError extends Error {
   private readonly value: number;
 
   private constructor(message: string, value: number) {
@@ -6,15 +6,15 @@ export class InvalidIntegerToConvertException extends Error {
     this.value = value;
   }
 
-  public static lowerThanZero(value: number): InvalidIntegerToConvertException {
-    return new InvalidIntegerToConvertException(
+  public static lowerThanZero(value: number): InvalidIntegerToConverterError {
+    return new InvalidIntegerToConverterError(
       'The integer serial number is lower than zero',
       value,
     );
   }
 
-  public static greaterThanMaximum(value: number): InvalidIntegerToConvertException {
-    return new InvalidIntegerToConvertException(
+  public static greaterThanMaximum(value: number): InvalidIntegerToConverterError {
+    return new InvalidIntegerToConverterError(
       'The integer serial number is greater than maximum value',
       value,
     );

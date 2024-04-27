@@ -1,38 +1,31 @@
 {
   "name": "@nodecfdi/rfc",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Librería para trabajar con RFC (Mexicano)",
-  "keywords": [
-    "rfc",
-    "mexican",
-    "homoclave"
-  ],
-  "private": false,
-  "author": "OcelotlStudio <contacto@ocelotlstudio.com>",
-  "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "unpkg": "./dist/index.global.js",
-  "browser": "./dist/index.global.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
-    }
-  },
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    },
+    "./errors": {
+      "require": "./dist/src/errors.cjs",
+      "import": "./dist/src/errors.js"
+    }
+  },
+  "imports": {
+    "#src/*": "./src/*.js",
+    "#tests/*": "./tests/*.js"
+  },
   "scripts": {
+    "clean": "del-cli dist",
     "prepare": "is-in-ci || husky",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint . --fix",
     "lint:check": "eslint .",
     "format": "prettier --write .",
@@ -40,38 +33,36 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "build": "rimraf dist && tsc && tsup",
-    "gen:docs": "rimraf docs && typedoc --options typedoc.json",
+    "prebuild": "pnpm clean",
+    "build": "tsup",
+    "gen:docs": "del-cli docs && typedoc --options typedoc.json",
+    "version": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s",
+    "postversion": "pnpm format && git add CHANGELOG.md",
     "release": "pnpm run build && pnpm changeset publish"
   },
-  "repository": "https://github.com/nodecfdi/rfc",
-  "bugs": {
-    "url": "https://github.com/nodecfdi/rfc/issues"
-  },
-  "homepage": "https://github.com/nodecfdi/rfc",
   "devDependencies": {
-    "@changesets/cli": "2.27.1",
+    "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^18.6.1",
     "@commitlint/config-conventional": "^18.6.3",
-    "@nodecfdi/eslint-config": "1.5.5",
-    "@nodecfdi/prettier-config": "1.1.1",
-    "@nodecfdi/tsconfig": "1.3.2",
-    "@types/luxon": "3.4.2",
-    "@types/node": "20.12.7",
-    "@vitest/coverage-istanbul": "1.4.0",
-    "eslint": "8.57.0",
-    "eslint-define-config": "2.1.0",
-    "husky": "9.0.11",
-    "is-in-ci": "0.1.0",
-    "jsdom": "24.0.0",
-    "luxon": "3.4.4",
-    "prettier": "3.2.5",
-    "rimraf": "5.0.5",
-    "tsup": "8.0.2",
-    "typedoc": "0.25.13",
-    "typedoc-material-theme": "1.0.2",
-    "typescript": "5.4.3",
-    "vitest": "1.4.0"
+    "@nodecfdi/eslint-config": "^1.6.5",
+    "@nodecfdi/prettier-config": "^1.1.1",
+    "@nodecfdi/tsconfig": "^1.5.0",
+    "@types/luxon": "^3.4.2",
+    "@types/node": "^20.12.7",
+    "@vitest/coverage-istanbul": "^1.5.2",
+    "conventional-changelog-cli": "^4.1.0",
+    "del-cli": "^5.1.0",
+    "eslint": "^8.57.0",
+    "eslint-define-config": "^2.1.0",
+    "husky": "^9.0.11",
+    "is-in-ci": "^0.1.0",
+    "luxon": "^3.4.4",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.2",
+    "typedoc": "^0.25.13",
+    "typedoc-material-theme": "^1.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.5.2"
   },
   "peerDependencies": {
     "@types/luxon": "3.4.2",
@@ -82,12 +73,27 @@
       "optional": true
     }
   },
-  "prettier": "@nodecfdi/prettier-config",
+  "author": "Fernando Isidro <luffynando@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/nodecfdi/rfc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodecfdi/rfc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nodecfdi/rfc/issues"
+  },
+  "keywords": [
+    "rfc",
+    "mexican",
+    "homoclave"
+  ],
   "engines": {
-    "node": "^20 || ^19 || ^18 || ^16"
+    "node": "^21 || ^20 || ^19 || ^18 || ^16"
   },
   "browserslist": [
     "defaults",
     "not IE 11"
-  ]
+  ],
+  "prettier": "@nodecfdi/prettier-config"
 }

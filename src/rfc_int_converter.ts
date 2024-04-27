@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { InvalidIntegerToConvertException } from './exceptions/invalid_integer_to_convert_exception.js';
+import { InvalidIntegerToConverterError } from './errors.js';
 
 /**
  * RfcIntConverter is a helper class to convert from an integer to RFC and backwards.
@@ -285,11 +285,11 @@ export class RfcIntConverter {
    */
   public intToString(value: number): string {
     if (value < 0) {
-      throw InvalidIntegerToConvertException.lowerThanZero(value);
+      throw InvalidIntegerToConverterError.lowerThanZero(value);
     }
 
     if (value > RfcIntConverter.MAX_INTEGER_VALUE) {
-      throw InvalidIntegerToConvertException.greaterThanMaximum(value);
+      throw InvalidIntegerToConverterError.greaterThanMaximum(value);
     }
 
     const integers: number[] = [];

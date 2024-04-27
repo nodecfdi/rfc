@@ -7,40 +7,7 @@ on:
 
 jobs:
   tests-coverage:
-    name: Build code coverage
-    runs-on: 'ubuntu-latest'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Cache .pnpm-store
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-node20-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-          run_install: true
-
-      - name: Create code coverage
-        run: |
-          pnpm test:coverage
-        env:
-          CI: true
-
-      - name: Store code coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: code-coverage
-          path: coverage
+    uses: nodecfdi/.github/.github/workflows/test_coverage.yml@main
 
   sonarcloud-secrets:
     name: SonarCloud check secrets are present
@@ -76,23 +43,6 @@ jobs:
 
       - name: Unshallow clone to provide blame information
         run: git fetch --unshallow
-
-      - name: Cache .pnpm-store
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-node20-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-          run_install: true
 
       - name: Obtain code coverage
         uses: actions/download-artifact@v4

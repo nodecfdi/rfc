@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import { Rfc } from '#src/rfc';
 
 describe('rfc', () => {
-  test('create_rfc_persona_fisica', () => {
+  test('create rfc persona fisica', () => {
     const input = 'COSC8001137NA';
     const rfc = Rfc.unparsed(input);
 
@@ -17,7 +17,7 @@ describe('rfc', () => {
     expect(rfc.calculateSerial()).toBe(40_270_344_269_627);
   });
 
-  test('create_rfc_moral', () => {
+  test('create rfc moral', () => {
     const input = 'DIM8701081LA';
     const rfc = Rfc.unparsed(input);
 
@@ -32,7 +32,7 @@ describe('rfc', () => {
     expect(rfc.calculateSerial()).toBe(1_348_025_748_541);
   });
 
-  test('create_with_foreign', () => {
+  test('create with foreign', () => {
     const rfc = Rfc.unparsed(Rfc.RFC_FOREIGN);
 
     expect(rfc.isForeign()).toBeTruthy();
@@ -41,7 +41,7 @@ describe('rfc', () => {
     expect(rfc.isMoral()).toBeFalsy();
   });
 
-  test('create_with_generic', () => {
+  test('create with generic', () => {
     const rfc = Rfc.unparsed(Rfc.RFC_GENERIC);
 
     expect(rfc.isGeneric()).toBeTruthy();
@@ -50,7 +50,7 @@ describe('rfc', () => {
     expect(rfc.isMoral()).toBeFalsy();
   });
 
-  test('parse_with_correct_data', () => {
+  test('parse with correct data', () => {
     const rfc = Rfc.parse('COSC8001137NA');
 
     expect(`${rfc}`).toBe('COSC8001137NA');
@@ -58,16 +58,16 @@ describe('rfc', () => {
     expect(rfc.toLocaleString()).toBe('COSC8001137NA');
   });
 
-  test('parse_error', () => {
+  test('parse error', () => {
     expect(() => Rfc.parse('COSC800113-7NA')).toThrow('valid parts');
   });
 
-  test('parse_or_null', () => {
+  test('parse or null', () => {
     expect(Rfc.parseOrNull('COSC8001137NA')).not.toBeNull();
     expect(Rfc.parseOrNull('')).toBeNull();
   });
 
-  test('serial_number', () => {
+  test('serial number', () => {
     const rfc = Rfc.fromSerial(1_348_025_748_541);
 
     // Current serial is undefined.
@@ -77,14 +77,14 @@ describe('rfc', () => {
     expect(rfc.calculateSerial()).toBe(1_348_025_748_541);
   });
 
-  test('create_bad_digit', () => {
+  test('create bad digit', () => {
     const rfc = Rfc.parse('COSC8001137N9');
 
     expect(rfc.calculateChecksum()).toBe('A');
     expect(rfc.doesCheckSumMatch()).toBeFalsy();
   });
 
-  test('with_multibyte', () => {
+  test('with multibyte', () => {
     const rfcMultibyte = 'AñÑ801231JK0';
     const expected = 'AÑÑ801231JK0';
 
@@ -93,32 +93,32 @@ describe('rfc', () => {
     expect(rfc.getRfc()).toBe(expected);
   });
 
-  test('json_serializable', () => {
+  test('json serializable', () => {
     const data = { rfc: Rfc.unparsed('COSC8001137NA') };
 
     expect(JSON.stringify(data)).toBe('{"rfc":"COSC8001137NA"}');
     expect(data.rfc.toJSON()).toBe('COSC8001137NA');
   });
 
-  test('create_generic', () => {
+  test('create generic', () => {
     const rfc = Rfc.newGeneric();
 
     expect(rfc.getRfc()).toBe(Rfc.RFC_GENERIC);
   });
 
-  test('create_foreign', () => {
+  test('create foreign', () => {
     const rfc = Rfc.newForeign();
 
     expect(rfc.getRfc()).toBe(Rfc.RFC_FOREIGN);
   });
 
-  test('all_works_on_rfc_valids_and_invalids', () => {
+  test('all works on rfc valids and invalids', () => {
     expect(Rfc.isValid('COSC8001137NA', Rfc.DISALLOW_GENERIC)).toBeTruthy();
     expect(Rfc.isValid('XEXX010101000', Rfc.DISALLOW_GENERIC)).toBeTruthy();
     expect(Rfc.isValid('XAXX010101000', Rfc.DISALLOW_GENERIC)).toBeFalsy();
   });
 
-  test('not_trown_nothing_on_default', () => {
+  test('not trown nothing on default', () => {
     const thrownFunction = (): void => {
       Rfc.checkIsValid(Rfc.RFC_GENERIC);
     };
@@ -126,7 +126,7 @@ describe('rfc', () => {
     expect(thrownFunction).not.toThrow('público en general');
   });
 
-  test('invalid_disallow_generic', () => {
+  test('invalid disallow generic', () => {
     const thrownFunction = (): void => {
       Rfc.checkIsValid(Rfc.RFC_GENERIC, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
     };
@@ -134,7 +134,7 @@ describe('rfc', () => {
     expect(thrownFunction).toThrow('público en general');
   });
 
-  test('invalid_disallow_foreign', () => {
+  test('invalid disallow foreign', () => {
     const thrownFunction = (): void => {
       Rfc.checkIsValid(Rfc.RFC_FOREIGN, Rfc.DISALLOW_GENERIC | Rfc.DISALLOW_FOREIGN);
     };
@@ -142,15 +142,15 @@ describe('rfc', () => {
     expect(thrownFunction).toThrow('operaciones con extranjeros');
   });
 
-  test('is_valid', () => {
+  test('is valid', () => {
     expect(Rfc.isValid('COSC8001137NA')).toBeTruthy();
   });
 
-  test('is_not_valid', () => {
+  test('is not valid', () => {
     expect(Rfc.isValid('COSC8099137NA')).toBeFalsy();
   });
 
-  test('obtain_date_leap_years', () => {
+  test('obtain date leap years', () => {
     const expected = DateTime.fromISO('2000-02-29').toMillis();
 
     expect(Rfc.obtainDate('XXX000229XX6')).toBe(expected);
@@ -170,7 +170,7 @@ describe('rfc', () => {
     ['ABCD010A01AAA'],
     ['ABCD01010AAAA'],
     ['ABCD-10123AAA'],
-  ])('obtain_date_with_invalid_input %s', (rfc: string) => {
+  ])('obtain date with invalid input %s', (rfc: string) => {
     expect(Rfc.obtainDate(rfc)).toBe(0);
   });
 });
