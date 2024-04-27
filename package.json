@@ -12,6 +12,10 @@
     ".": {
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
+    },
+    "./errors": {
+      "require": "./dist/src/errors.cjs",
+      "import": "./dist/src/errors.js"
     }
   },
   "imports": {

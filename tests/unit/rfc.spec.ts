@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import Rfc from '#src/rfc';
+import { Rfc } from '#src/rfc';
 
 describe('rfc', () => {
   test('create rfc persona fisica', () => {

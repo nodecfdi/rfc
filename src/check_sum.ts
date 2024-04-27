@@ -1,4 +1,4 @@
-export default class CheckSum {
+export class CheckSum {
   private readonly DICTIONARY: Record<string, number> = {
     ' ': 37,
     '#': 38,
