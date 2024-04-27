@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { InvalidIntegerToConvertException } from './exceptions/invalid_integer_to_convert_exception.js';
+import { InvalidIntegerToConvertError } from './errors.js';
 
 /**
  * RfcIntConverter is a helper class to convert from an integer to RFC and backwards.
@@ -15,7 +15,7 @@ import { InvalidIntegerToConvertException } from './exceptions/invalid_integer_t
  * To transform from the integer representation it gets modulus for each base and retrieve the 9 integer parts:
  * 40,270,344,269,627 will be: [3, 14, 18, 2, 416731392, 33, 23, 10], then will convert each part to its strings.
  */
-export class RfcIntConverter {
+export default class RfcIntConverter {
   public static readonly MIN_INTEGER_VALUE = 0;
 
   public static readonly MAX_INTEGER_VALUE = 331_482_040_243_200 - 1; // EXP[last] * BASE[last]
@@ -285,11 +285,11 @@ export class RfcIntConverter {
    */
   public intToString(value: number): string {
     if (value < 0) {
-      throw InvalidIntegerToConvertException.lowerThanZero(value);
+      throw InvalidIntegerToConvertError.lowerThanZero(value);
     }
 
     if (value > RfcIntConverter.MAX_INTEGER_VALUE) {
-      throw InvalidIntegerToConvertException.greaterThanMaximum(value);
+      throw InvalidIntegerToConvertError.greaterThanMaximum(value);
     }
 
     const integers: number[] = [];

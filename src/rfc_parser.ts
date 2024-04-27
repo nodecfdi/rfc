@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
-import { InvalidExpressionToParseException } from './exceptions/invalid_expression_to_parse_exception.js';
+import { InvalidExpressionToParseError } from './errors.js';
 
-export class RfcParser {
+export default class RfcParser {
   private constructor(
     /** "siglas" part ____000101AAA */
     private readonly _name: string,
@@ -56,7 +56,7 @@ export class RfcParser {
       `${matches.groups.year}${matches.groups.month}${matches.groups.day}` !==
       date.toFormat('yyLLdd')
     ) {
-      throw InvalidExpressionToParseException.invalidDate(rfc);
+      throw InvalidExpressionToParseError.invalidDate(rfc);
     }
 
     return new RfcParser(

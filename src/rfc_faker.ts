@@ -1,9 +1,9 @@
-import { RfcIntConverter } from './rfc_int_converter.js';
+import RfcIntConverter from './rfc_int_converter.js';
 
 /**
  * This class creates a random but syntactically valid Rfc string.
  */
-export class RfcFaker {
+export default class RfcFaker {
   /**
    * Return an RFC for Persona Moral (12 multibyte chars length) or Persona Fisica (13 multibyte chars length)
    *
