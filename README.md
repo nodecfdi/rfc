@@ -27,29 +27,9 @@ Esta librería permite trabajar con esta clave desde el aplicativo de Node o Bro
 
 Librería inspirada por la versión para php <https://github.com/phpcfdi/rfc>
 
-## Instalación
-
-NPM
-
-```bash
-npm i @nodecfdi/rfc --save
-```
-
-YARN
-
-```bash
-yarn add @nodecfdi/rfc
-```
-
-PNPM
-
-```bash
-pnpm add @nodecfdi/rfc
-```
-
 ## Documentación
 
-La documentación está disponible en el sitio web [NodeCfdi](https://nodecfdi.com)
+La documentación está disponible en el sitio web [NodeCfdi](https://nodecfdi.com/librarys/rfc/getting-started/)
 
 ## Soporte
 

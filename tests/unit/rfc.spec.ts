@@ -14,7 +14,7 @@ describe('rfc', () => {
     expect(rfc.isFisica()).toBeTruthy();
     expect(rfc.calculateChecksum()).toBe('A');
     expect(rfc.doesCheckSumMatch()).toBeTruthy();
-    expect(rfc.calculateSerial()).toBe(40_270_344_269_627);
+    expect(rfc.calculateSerial()).toBe(40270344269627);
   });
 
   test('create rfc moral', () => {
@@ -29,7 +29,7 @@ describe('rfc', () => {
     expect(rfc.isFisica()).toBeFalsy();
     expect(rfc.calculateChecksum()).toBe('A');
     expect(rfc.doesCheckSumMatch()).toBeTruthy();
-    expect(rfc.calculateSerial()).toBe(1_348_025_748_541);
+    expect(rfc.calculateSerial()).toBe(1348025748541);
   });
 
   test('create with foreign', () => {
@@ -68,13 +68,13 @@ describe('rfc', () => {
   });
 
   test('serial number', () => {
-    const rfc = Rfc.fromSerial(1_348_025_748_541);
+    const rfc = Rfc.fromSerial(1348025748541);
 
     // Current serial is undefined.
-    expect(rfc.calculateSerial()).toBe(1_348_025_748_541);
+    expect(rfc.calculateSerial()).toBe(1348025748541);
     expect(rfc.getRfc()).toBe('DIM8701081LA');
     // Current serial is defined.
-    expect(rfc.calculateSerial()).toBe(1_348_025_748_541);
+    expect(rfc.calculateSerial()).toBe(1348025748541);
   });
 
   test('create bad digit', () => {
