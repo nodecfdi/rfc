@@ -1,3 +1,13 @@
+## <small>2.0.4 (2024-07-01)</small>
+
+- docs: :memo: generate docs ([e628da0](https://github.com/nodecfdi/rfc/commit/e628da0))
+- docs: :memo: update link with target documentation in nodecfdi portal library ([c3f9ca5](https://github.com/nodecfdi/rfc/commit/c3f9ca5))
+- chore: :arrow_up: update dependencies ([6a0f217](https://github.com/nodecfdi/rfc/commit/6a0f217))
+- chore: :arrow_up: update dependencies ([554cdfa](https://github.com/nodecfdi/rfc/commit/554cdfa))
+- chore: :construction: set template for message commit release ([1d525d6](https://github.com/nodecfdi/rfc/commit/1d525d6))
+- chore(deps): :arrow_up: update dependencies ([0580d8a](https://github.com/nodecfdi/rfc/commit/0580d8a))
+- test: :recycle: prefer not sepair number ([fa87bbb](https://github.com/nodecfdi/rfc/commit/fa87bbb))
+
 ## [2.0.3](https://github.com/nodecfdi/rfc/compare/v2.0.2...v2.0.3) (2024-04-27)
 
 ### Performance Improvements
