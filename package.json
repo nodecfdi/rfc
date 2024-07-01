@@ -49,7 +49,7 @@
     "@nodecfdi/prettier-config": "^1.1.1",
     "@nodecfdi/tsconfig": "^1.5.0",
     "@types/luxon": "^3.4.2",
-    "@types/node": "^20.14.6",
+    "@types/node": "^20.14.9",
     "@vitest/coverage-istanbul": "^1.6.0",
     "conventional-changelog-cli": "^5.0.0",
     "del-cli": "^5.1.0",
