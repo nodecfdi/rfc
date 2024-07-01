@@ -32,8 +32,8 @@ describe('rfc int converter', () => {
   });
 
   test.each([
-    [40_270_344_269_627, 'COSC8001137NA'],
-    [1_348_025_748_541, 'DIM8701081LA'],
+    [40270344269627, 'COSC8001137NA'],
+    [1348025748541, 'DIM8701081LA'],
   ])('known values %s - %s', (inputSerial: number, inputRfc: string) => {
     expect(converter.intToString(inputSerial)).toBe(inputRfc);
     expect(converter.stringToInt(inputRfc)).toBe(inputSerial);
