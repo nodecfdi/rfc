@@ -1,5 +1,5 @@
-import { InvalidIntegerToConverterError } from '#src/errors';
 import { DateTime } from 'luxon';
+import { InvalidIntegerToConverterError } from '#src/errors';
 
 /**
  * RfcIntConverter is a helper class to convert from an integer to RFC and backwards.

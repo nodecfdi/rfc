@@ -1,5 +1,5 @@
-import { InvalidExpressionToParseError } from '#src/errors';
 import { DateTime } from 'luxon';
+import { InvalidExpressionToParseError } from '#src/errors';
 
 export default class RfcParser {
   private constructor(
