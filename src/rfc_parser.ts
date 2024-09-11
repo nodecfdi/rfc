@@ -1,7 +1,7 @@
+import { InvalidExpressionToParseError } from '#src/errors';
 import { DateTime } from 'luxon';
-import { InvalidExpressionToParseError } from './errors.js';
 
-export class RfcParser {
+export default class RfcParser {
   private constructor(
     /** "siglas" part ____000101AAA */
     private readonly _name: string,

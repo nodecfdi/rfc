@@ -1,11 +1,11 @@
-import { CheckSum } from './check_sum.js';
-import { RfcIntConverter } from './rfc_int_converter.js';
-import { RfcParser } from './rfc_parser.js';
+import CheckSum from '#src/check_sum';
+import RfcIntConverter from '#src/rfc_int_converter';
+import RfcParser from '#src/rfc_parser';
 
 /**
  * Value object representation of an RFC.
  */
-export class Rfc {
+export default class Rfc {
   /** Generic representation of an RFC (some use cases include to invoice without RFC) */
   public static readonly RFC_GENERIC = 'XAXX010101000';
 

@@ -1,4 +1,4 @@
-export class InvalidExpressionToParseError extends Error {
+export default class InvalidExpressionToParseError extends Error {
   private readonly rfc: string;
 
   private constructor(message: string, rfc: string) {

@@ -1,4 +1,4 @@
-export class InvalidIntegerToConverterError extends Error {
+export default class InvalidIntegerToConverterError extends Error {
   private readonly value: number;
 
   private constructor(message: string, value: number) {

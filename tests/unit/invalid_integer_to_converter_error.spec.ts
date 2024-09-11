@@ -1,4 +1,4 @@
-import { InvalidIntegerToConverterError } from '#src/errors/invalid_integer_to_converter_error';
+import InvalidIntegerToConverterError from '#src/errors/invalid_integer_to_converter_error';
 
 describe('invalid integer to converter error', () => {
   test('error lower than zero', () => {
