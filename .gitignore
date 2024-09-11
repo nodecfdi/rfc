@@ -7,9 +7,10 @@ coverage
 *.sublime-project
 *.sublime-workspace
 *.log
-.pnpm-store
 build
 dist
 yarn.lock
 shrinkwrap.yaml
 package-lock.json
+.tshy
+.tshy-build
