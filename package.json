@@ -29,8 +29,7 @@
         "types": "./dist/commonjs/errors.d.ts",
         "default": "./dist/commonjs/errors.js"
       }
-    },
-    "./package.json": "./package.json"
+    }
   },
   "imports": {
     "#src/*": "./src/*.js"
@@ -57,23 +56,23 @@
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@jsprismarine/typedoc-material-theme": "^1.0.4",
-    "@nodecfdi/eslint-config": "^2.0.2",
+    "@nodecfdi/eslint-config": "^2.0.6",
     "@nodecfdi/prettier-config": "^1.2.0",
     "@nodecfdi/tsconfig": "^1.7.2",
     "@types/luxon": "^3.4.2",
-    "@types/node": "^20.16.5",
-    "@vitest/coverage-istanbul": "^2.0.5",
+    "@types/node": "^20.16.10",
+    "@vitest/coverage-istanbul": "^2.1.2",
     "auto-changelog": "^2.5.0",
-    "eslint": "^9.10.0",
-    "husky": "^9.1.5",
+    "eslint": "^9.12.0",
+    "husky": "^9.1.6",
     "is-in-ci": "^1.0.0",
     "luxon": "^3.4.4",
     "np": "^10.0.7",
     "prettier": "^3.3.3",
     "tshy": "^3.0.2",
-    "typedoc": "^0.26.7",
+    "typedoc": "^0.26.8",
     "typescript": "^5.6.2",
-    "vitest": "^2.0.5"
+    "vitest": "^2.1.2"
   },
   "peerDependencies": {
     "@types/luxon": "3.4.2",
@@ -112,7 +111,7 @@
     ]
   },
   "prettier": "@nodecfdi/prettier-config",
-  "packageManager": "pnpm@9.10.0",
+  "packageManager": "pnpm@9.12.0",
   "publishConfig": {
     "access": "public",
     "tag": "latest"
@@ -131,8 +130,7 @@
     "selfLink": false,
     "exports": {
       ".": "./src/index.ts",
-      "./errors": "./src/errors.ts",
-      "./package.json": "./package.json"
+      "./errors": "./src/errors.ts"
     }
   }
 }
